@@ -1,296 +1,294 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المستثمرون - العقارات الفاخرة</title>
+    <title>المستثمرون - شريكك في الاستثمار العقاري</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         body {
             box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
         }
         
-        .hero-gradient {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
         }
         
         .property-card {
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
         }
         
         .property-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         }
         
-        .fade-in {
-            animation: fadeIn 0.8s ease-in;
+        .property-image {
+            transition: transform 0.4s ease;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        .property-card:hover .property-image {
+            transform: scale(1.1);
         }
         
-        .nav-link {
-            transition: color 0.3s ease;
+        .fade-up {
+            animation: fadeUp 0.8s ease-out;
         }
         
-        .nav-link:hover {
-            color: #3b82f6;
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .search-input {
+        .gradient-text {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .nav-item {
+            position: relative;
             transition: all 0.3s ease;
         }
         
-        .search-input:focus {
-            transform: scale(1.02);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #f59e0b;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-item:hover::after {
+            width: 100%;
+        }
+        
+        .stats-counter {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #f59e0b;
+        }
+        
+        .floating-card {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
     </style>
 </head>
 <body class="bg-gray-50 font-sans">
-    <!-- Header -->
-    <header class="bg-white shadow-lg sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect">
+        <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
                 <div class="flex items-center space-x-4 space-x-reverse">
-                    <div class="bg-blue-600 text-white p-3 rounded-lg">
-                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+                    <div class="bg-gradient-to-r from-amber-500 to-orange-600 p-3 rounded-xl shadow-lg">
+                        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                         </svg>
                     </div>
-                    <h1 class="text-2xl font-bold text-gray-800">المستثمرون</h1>
+                    <h1 class="text-2xl font-bold gradient-text">المستثمرون</h1>
                 </div>
                 
                 <div class="hidden md:flex space-x-8 space-x-reverse">
-                    <a href="#" class="nav-link text-gray-700 hover:text-blue-600 font-medium">الرئيسية</a>
-                    <a href="#properties" class="nav-link text-gray-700 hover:text-blue-600 font-medium">العقارات</a>
-                    <a href="#services" class="nav-link text-gray-700 hover:text-blue-600 font-medium">خدماتنا</a>
-                    <a href="#about" class="nav-link text-gray-700 hover:text-blue-600 font-medium">من نحن</a>
-                    <a href="#contact" class="nav-link text-gray-700 hover:text-blue-600 font-medium">اتصل بنا</a>
+                    <a href="#" class="nav-item text-white hover:text-amber-400 font-medium">الرئيسية</a>
+                    <a href="#properties" class="nav-item text-white hover:text-amber-400 font-medium">العقارات</a>
+                    <a href="#about" class="nav-item text-white hover:text-amber-400 font-medium">خدماتنا</a>
+                    <a href="#about" class="nav-item text-white hover:text-amber-400 font-medium">من نحن</a>
+                    <a href="#contact" class="nav-item text-white hover:text-amber-400 font-medium">تواصل معنا</a>
                 </div>
                 
-                <button class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                    تسجيل الدخول
+                <button class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-xl hover:shadow-lg transition-all font-medium">
+                    انضم إلينا
                 </button>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <section class="hero-gradient text-white py-20">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-5xl font-bold mb-6 fade-in">اكتشف عقارك المثالي</h2>
-            <p class="text-xl mb-12 opacity-90 fade-in">نحن نساعدك في العثور على أفضل الاستثمارات العقارية والمنازل الفاخرة</p>
-            
-            <!-- Search Bar -->
-            <div class="bg-white rounded-2xl p-6 shadow-2xl max-w-4xl mx-auto fade-in">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <div>
-                        <label for="location" class="block text-gray-700 text-sm font-medium mb-2">الموقع</label>
-                        <select id="location" class="search-input w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-700">
-                            <option>اختر المدينة</option>
-                            <option>الرياض</option>
-                            <option>جدة</option>
-                            <option>الدمام</option>
-                            <option>مكة المكرمة</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="type" class="block text-gray-700 text-sm font-medium mb-2">نوع العقار</label>
-                        <select id="type" class="search-input w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-700">
-                            <option>جميع الأنواع</option>
-                            <option>شقة</option>
-                            <option>فيلا</option>
-                            <option>مكتب</option>
-                            <option>محل تجاري</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="price" class="block text-gray-700 text-sm font-medium mb-2">السعر</label>
-                        <select id="price" class="search-input w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-gray-700">
-                            <option>جميع الأسعار</option>
-                            <option>أقل من 500,000</option>
-                            <option>500,000 - 1,000,000</option>
-                            <option>أكثر من 1,000,000</option>
-                        </select>
-                    </div>
-                    <div class="flex items-end">
-                        <button onclick="searchProperties()" class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-colors font-medium">
-                            بحث
+    <section class="text-white min-h-screen flex items-center relative overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Modern Buildings" class="w-full h-full object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="fade-up">
+                    <h2 class="text-6xl font-black mb-6 leading-tight tracking-tight">
+                        استثمر في 
+                        <span class="gradient-text">المستقبل</span>
+                    </h2>
+                    <p class="text-xl mb-8 text-gray-300 leading-relaxed">
+                        نحن نقدم أفضل العقارات الفاخرة للبيع والمشاريع الاستثمارية المميزة. 
+                        اشتري عقارك المثالي معنا اليوم.
+                    </p>
+                    
+
+                    
+                    <div class="flex space-x-4 space-x-reverse">
+                        <button onclick="scrollToProperties()" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-xl hover:shadow-xl transition-all font-bold text-lg tracking-wide">
+                            استكشف العقارات
                         </button>
                     </div>
                 </div>
+                
+
             </div>
         </div>
     </section>
 
     <!-- Featured Properties -->
-    <section id="properties" class="py-16 bg-white">
+    <section id="properties" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h3 class="text-4xl font-bold text-gray-800 mb-4">العقارات المميزة</h3>
-                <p class="text-gray-600 text-lg">اكتشف مجموعة مختارة من أفضل العقارات المتاحة</p>
+            <div class="text-center mb-16">
+                <h3 class="text-5xl font-black text-gray-800 mb-6 tracking-tight">العقارات المميزة للبيع</h3>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto font-medium leading-relaxed">
+                    اكتشف مجموعة مختارة بعناية من أرقى العقارات المعروضة للبيع في أفضل المواقع
+                </p>
             </div>
             
-            <div id="properties-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Property cards will be inserted here -->
+            <div id="properties-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Properties will be loaded here -->
+            </div>
+            
+            <div class="text-center mt-12">
+                <button onclick="loadMoreProperties()" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-xl hover:shadow-xl transition-all font-semibold">
+                    عرض المزيد من العقارات
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-16 bg-gray-100">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h3 class="text-4xl font-bold text-gray-800 mb-4">خدماتنا</h3>
-                <p class="text-gray-600 text-lg">نقدم مجموعة شاملة من الخدمات العقارية</p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow">
-                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/>
-                        </svg>
-                    </div>
-                    <h4 class="text-xl font-bold text-gray-800 mb-3">بيع وشراء العقارات</h4>
-                    <p class="text-gray-600">نساعدك في بيع وشراء العقارات بأفضل الأسعار والشروط</p>
-                </div>
-                
-                <div class="bg-white p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow">
-                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                        </svg>
-                    </div>
-                    <h4 class="text-xl font-bold text-gray-800 mb-3">الاستشارات العقارية</h4>
-                    <p class="text-gray-600">استشارات متخصصة لاتخاذ أفضل القرارات الاستثمارية</p>
-                </div>
-                
-                <div class="bg-white p-8 rounded-xl shadow-lg text-center hover:shadow-xl transition-shadow">
-                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
-                        </svg>
-                    </div>
-                    <h4 class="text-xl font-bold text-gray-800 mb-3">إدارة الممتلكات</h4>
-                    <p class="text-gray-600">خدمات إدارة شاملة لممتلكاتك العقارية</p>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- About Section -->
-    <section id="about" class="py-16 bg-white">
+    <section id="about" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div>
-                    <h3 class="text-4xl font-bold text-gray-800 mb-6">من نحن</h3>
-                    <p class="text-gray-600 text-lg mb-6">
-                        المستثمرون هي شركة رائدة في مجال العقارات، نتميز بخبرة واسعة في السوق العقاري السعودي. 
-                        نحن نقدم خدمات متكاملة تشمل بيع وشراء وتأجير العقارات السكنية والتجارية.
-                    </p>
-                    <p class="text-gray-600 text-lg mb-8">
-                        فريقنا من الخبراء المتخصصين يعمل على تقديم أفضل الحلول العقارية التي تلبي احتياجات عملائنا 
-                        وتحقق أهدافهم الاستثمارية.
-                    </p>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-blue-600 mb-2">500+</div>
-                            <div class="text-gray-600">عقار مباع</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-blue-600 mb-2">1000+</div>
-                            <div class="text-gray-600">عميل راضي</div>
-                        </div>
-                    </div>
+                    <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2096&q=80" alt="Luxury Real Estate Investment" class="rounded-3xl shadow-2xl w-full h-96 object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
                 </div>
-                <div class="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-8 text-white">
-                    <h4 class="text-2xl font-bold mb-6">لماذا تختارنا؟</h4>
-                    <ul class="space-y-4">
-                        <li class="flex items-center">
-                            <svg class="w-6 h-6 ml-3" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                            </svg>
-                            خبرة أكثر من 15 عاماً في السوق
-                        </li>
-                        <li class="flex items-center">
-                            <svg class="w-6 h-6 ml-3" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                            </svg>
-                            فريق من الخبراء المعتمدين
-                        </li>
-                        <li class="flex items-center">
-                            <svg class="w-6 h-6 ml-3" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                            </svg>
-                            خدمة عملاء متميزة 24/7
-                        </li>
-                        <li class="flex items-center">
-                            <svg class="w-6 h-6 ml-3" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
-                            </svg>
-                            أسعار تنافسية وشفافة
-                        </li>
-                    </ul>
+                
+                <div>
+                    <h3 class="text-5xl font-black text-gray-800 mb-8 tracking-tight">من نحن</h3>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed font-medium">
+                        المستثمرون هي شركة رائدة في مجال الاستثمار العقاري، تأسست على يد فريق من الخبراء 
+                        المتخصصين في السوق العقاري العماني والإماراتي. نحن نؤمن بأن العقار هو أساس الثروة المستدامة.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed font-medium">
+                        منذ تأسيسنا، نجحنا في تحقيق عوائد استثمارية متميزة لعملائنا من خلال اختيار أفضل 
+                        الفرص الاستثمارية في عمان والإمارات.
+                    </p>
+                    
+
+                    
+                    <button onclick="learnMore()" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-xl hover:shadow-xl transition-all font-semibold">
+                        اعرف المزيد عنا
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-16 bg-gray-900 text-white">
+    <section id="contact" class="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h3 class="text-4xl font-bold mb-4">تواصل معنا</h3>
-                <p class="text-gray-300 text-lg">نحن هنا لمساعدتك في جميع احتياجاتك العقارية</p>
+            <div class="text-center mb-16">
+                <h3 class="text-5xl font-black mb-6 tracking-tight">تواصل معنا</h3>
             </div>
             
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
                 <div>
-                    <h4 class="text-2xl font-bold mb-6">معلومات التواصل</h4>
-                    <div class="space-y-4">
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 ml-4 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-                            </svg>
-                            <span>info@almostathmeroon.com</span>
+                    <h4 class="text-3xl font-bold mb-8">معلومات التواصل</h4>
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 space-x-reverse">
+                            <div class="bg-gradient-to-r from-amber-500 to-orange-600 p-3 rounded-full">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-gray-300">البريد الإلكتروني</p>
+                                <p class="text-xl font-semibold">theinvestors65@gmail.com</p>
+                            </div>
                         </div>
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 ml-4 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-                            </svg>
-                            <span>+966 11 123 4567</span>
-                        </div>
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 ml-4 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"/>
-                            </svg>
-                            <span>الرياض، المملكة العربية السعودية</span>
+                        
+                        <div class="flex items-center space-x-4 space-x-reverse">
+                            <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-3 rounded-full">
+                                <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-gray-300">رقم الهاتف</p>
+                                <p class="text-xl font-semibold">+968 7714 6455</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div>
-                    <form onsubmit="submitContact(event)" class="space-y-4">
-                        <div>
-                            <label for="name" class="block text-sm font-medium mb-2">الاسم الكامل</label>
-                            <input type="text" id="name" required class="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500">
+                <div class="glass-effect p-8 rounded-2xl">
+                    <form onsubmit="submitContactForm(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="firstName" class="block text-sm font-medium mb-2">الاسم الأول</label>
+                                <input type="text" id="firstName" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300" placeholder="أدخل اسمك الأول">
+                            </div>
+                            <div>
+                                <label for="lastName" class="block text-sm font-medium mb-2">اسم العائلة</label>
+                                <input type="text" id="lastName" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300" placeholder="أدخل اسم العائلة">
+                            </div>
                         </div>
+                        
                         <div>
                             <label for="email" class="block text-sm font-medium mb-2">البريد الإلكتروني</label>
-                            <input type="email" id="email" required class="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500">
+                            <input type="email" id="email" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300" placeholder="أدخل بريدك الإلكتروني">
                         </div>
+                        
+                        <div>
+                            <label for="phone" class="block text-sm font-medium mb-2">رقم الهاتف</label>
+                            <input type="tel" id="phone" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300" placeholder="أدخل رقم هاتفك">
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="block text-sm font-medium mb-2">موضوع الرسالة</label>
+                            <select id="subject" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white">
+                                <option value="" class="text-gray-800">اختر الموضوع</option>
+                                <option value="buying" class="text-gray-800">شراء عقار</option>
+                                <option value="selling" class="text-gray-800">بيع عقار</option>
+                                <option value="other" class="text-gray-800">أخرى</option>
+                            </select>
+                        </div>
+                        
                         <div>
                             <label for="message" class="block text-sm font-medium mb-2">الرسالة</label>
-                            <textarea id="message" rows="4" required class="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+                            <textarea id="message" rows="4" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300" placeholder="اكتب رسالتك هنا..."></textarea>
                         </div>
-                        <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                        
+                        <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-white p-4 rounded-lg hover:shadow-xl transition-all font-semibold text-lg">
                             إرسال الرسالة
                         </button>
                     </form>
@@ -300,233 +298,203 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
+    <footer class="bg-gray-900 text-white py-12">
         <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
-                    <div class="flex items-center space-x-2 space-x-reverse mb-4">
-                        <div class="bg-blue-600 text-white p-2 rounded">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+                    <div class="flex items-center space-x-3 space-x-reverse mb-6">
+                        <div class="bg-gradient-to-r from-amber-500 to-orange-600 p-2 rounded-lg">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                             </svg>
                         </div>
-                        <h5 class="text-xl font-bold">المستثمرون</h5>
+                        <h5 class="text-xl font-bold gradient-text">المستثمرون</h5>
                     </div>
-                    <p class="text-gray-400">شريكك الموثوق في عالم العقارات</p>
-                </div>
-                
-                <div>
-                    <h6 class="font-bold mb-4">روابط سريعة</h6>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">الرئيسية</a></li>
-                        <li><a href="#properties" class="hover:text-white transition-colors">العقارات</a></li>
-                        <li><a href="#services" class="hover:text-white transition-colors">الخدمات</a></li>
-                        <li><a href="#about" class="hover:text-white transition-colors">من نحن</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h6 class="font-bold mb-4">الخدمات</h6>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white transition-colors">بيع العقارات</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">شراء العقارات</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">تأجير العقارات</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">الاستشارات</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h6 class="font-bold mb-4">تابعنا</h6>
+                    <p class="text-gray-400 mb-4">شريكك الموثوق في عالم الاستثمار العقاري</p>
                     <div class="flex space-x-4 space-x-reverse">
-                        <a href="#" class="bg-gray-700 p-2 rounded hover:bg-blue-600 transition-colors">
+                        <a href="#" class="bg-gray-800 p-2 rounded-lg hover:bg-amber-600 transition-colors">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
                             </svg>
                         </a>
-                        <a href="#" class="bg-gray-700 p-2 rounded hover:bg-blue-600 transition-colors">
+                        <a href="#" class="bg-gray-800 p-2 rounded-lg hover:bg-amber-600 transition-colors">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
                             </svg>
                         </a>
-                        <a href="#" class="bg-gray-700 p-2 rounded hover:bg-blue-600 transition-colors">
+                        <a href="#" class="bg-gray-800 p-2 rounded-lg hover:bg-amber-600 transition-colors">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
                             </svg>
                         </a>
                     </div>
                 </div>
+                
+                <div>
+                    <h6 class="font-bold mb-4 text-lg">روابط سريعة</h6>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-amber-400 transition-colors">الرئيسية</a></li>
+                        <li><a href="#properties" class="hover:text-amber-400 transition-colors">العقارات</a></li>
+                        <li><a href="#about" class="hover:text-amber-400 transition-colors">الخدمات</a></li>
+                        <li><a href="#about" class="hover:text-amber-400 transition-colors">من نحن</a></li>
+                        <li><a href="#contact" class="hover:text-amber-400 transition-colors">تواصل معنا</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h6 class="font-bold mb-4 text-lg">خدماتنا</h6>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-amber-400 transition-colors">بيع العقارات</a></li>
+                        <li><a href="#" class="hover:text-amber-400 transition-colors">شراء العقارات</a></li>
+                    </ul>
+                </div>
+                
+
             </div>
             
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 المستثمرون. جميع الحقوق محفوظة.</p>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 المستثمرون. جميع الحقوق محفوظة. | تصميم وتطوير فريق المستثمرون</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Sample property data
-        const properties = [
-            {
-                id: 1,
-                title: "فيلا فاخرة في الرياض",
-                location: "الرياض - حي الملقا",
-                price: "2,500,000",
-                bedrooms: 5,
-                bathrooms: 4,
-                area: 450,
-                type: "فيلا",
-                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Crect width='400' height='250' fill='%23f3f4f6'/%3E%3Cpath d='M50 200 L200 80 L350 200 L350 220 L50 220 Z' fill='%23374151'/%3E%3Crect x='180' y='140' width='40' height='60' fill='%236b7280'/%3E%3Crect x='120' y='120' width='30' height='30' fill='%239ca3af'/%3E%3Crect x='250' y='120' width='30' height='30' fill='%239ca3af'/%3E%3Ctext x='200' y='240' text-anchor='middle' fill='%234b5563' font-family='Arial' font-size='14'%3Eفيلا فاخرة%3C/text%3E%3C/svg%3E"
-            },
-            {
-                id: 2,
-                title: "شقة عصرية في جدة",
-                location: "جدة - كورنيش جدة",
-                price: "850,000",
-                bedrooms: 3,
-                bathrooms: 2,
-                area: 180,
-                type: "شقة",
-                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Crect width='400' height='250' fill='%23f3f4f6'/%3E%3Crect x='50' y='50' width='300' height='150' fill='%23374151'/%3E%3Crect x='80' y='80' width='40' height='40' fill='%239ca3af'/%3E%3Crect x='140' y='80' width='40' height='40' fill='%239ca3af'/%3E%3Crect x='200' y='80' width='40' height='40' fill='%239ca3af'/%3E%3Crect x='260' y='80' width='40' height='40' fill='%239ca3af'/%3E%3Crect x='180' y='140' width='40' height='60' fill='%236b7280'/%3E%3Ctext x='200' y='240' text-anchor='middle' fill='%234b5563' font-family='Arial' font-size='14'%3Eشقة عصرية%3C/text%3E%3C/svg%3E"
-            },
-            {
-                id: 3,
-                title: "مكتب تجاري في الدمام",
-                location: "الدمام - الكورنيش",
-                price: "1,200,000",
-                bedrooms: 0,
-                bathrooms: 3,
-                area: 250,
-                type: "مكتب",
-                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Crect width='400' height='250' fill='%23f3f4f6'/%3E%3Crect x='50' y='30' width='300' height='170' fill='%23374151'/%3E%3Crect x='70' y='50' width='25' height='25' fill='%239ca3af'/%3E%3Crect x='105' y='50' width='25' height='25' fill='%239ca3af'/%3E%3Crect x='140' y='50' width='25' height='25' fill='%239ca3af'/%3E%3Crect x='175' y='50' width='25' height='25' fill='%239ca3af'/%3E%3Crect x='210' y='50' width='25' height='25' fill='%239ca3af'/%3E%3Crect x='245' y='50' width='25' height='25' fill='%239ca3af'/%3E%3Crect x='280' y='50' width='25' height='25' fill='%239ca3af'/%3E%3Crect x='315' y='50' width='25' height='25' fill='%239ca3af'/%3E%3Crect x='180' y='150' width='40' height='50' fill='%236b7280'/%3E%3Ctext x='200' y='240' text-anchor='middle' fill='%234b5563' font-family='Arial' font-size='14'%3Eمكتب تجاري%3C/text%3E%3C/svg%3E"
-            },
-            {
-                id: 4,
-                title: "قصر في مكة المكرمة",
-                location: "مكة المكرمة - العزيزية",
-                price: "4,800,000",
-                bedrooms: 8,
-                bathrooms: 6,
-                area: 800,
-                type: "فيلا",
-                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Crect width='400' height='250' fill='%23f3f4f6'/%3E%3Cpath d='M30 200 L200 60 L370 200 L370 220 L30 220 Z' fill='%23374151'/%3E%3Crect x='60' y='180' width='280' height='40' fill='%23374151'/%3E%3Crect x='180' y='140' width='40' height='60' fill='%236b7280'/%3E%3Crect x='100' y='120' width='30' height='30' fill='%239ca3af'/%3E%3Crect x='140' y='120' width='30' height='30' fill='%239ca3af'/%3E%3Crect x='230' y='120' width='30' height='30' fill='%239ca3af'/%3E%3Crect x='270' y='120' width='30' height='30' fill='%239ca3af'/%3E%3Ctext x='200' y='240' text-anchor='middle' fill='%234b5563' font-family='Arial' font-size='14'%3Eقصر فاخر%3C/text%3E%3C/svg%3E"
-            },
-            {
-                id: 5,
-                title: "شقة بإطلالة بحرية",
-                location: "جدة - أبحر الشمالية",
-                price: "1,100,000",
-                bedrooms: 4,
-                bathrooms: 3,
-                area: 220,
-                type: "شقة",
-                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Crect width='400' height='250' fill='%23dbeafe'/%3E%3Crect x='50' y='80' width='300' height='120' fill='%23374151'/%3E%3Crect x='80' y='110' width='40' height='40' fill='%2393c5fd'/%3E%3Crect x='140' y='110' width='40' height='40' fill='%2393c5fd'/%3E%3Crect x='200' y='110' width='40' height='40' fill='%2393c5fd'/%3E%3Crect x='260' y='110' width='40' height='40' fill='%2393c5fd'/%3E%3Crect x='180' y='160' width='40' height='40' fill='%236b7280'/%3E%3Cpath d='M0 220 Q100 200 200 210 T400 220 L400 250 L0 250 Z' fill='%233b82f6'/%3E%3Ctext x='200' y='240' text-anchor='middle' fill='%23ffffff' font-family='Arial' font-size='14'%3Eإطلالة بحرية%3C/text%3E%3C/svg%3E"
-            },
-            {
-                id: 6,
-                title: "محل تجاري مميز",
-                location: "الرياض - شارع التحلية",
-                price: "750,000",
-                bedrooms: 0,
-                bathrooms: 2,
-                area: 120,
-                type: "محل تجاري",
-                image: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250' viewBox='0 0 400 250'%3E%3Crect width='400' height='250' fill='%23f3f4f6'/%3E%3Crect x='50' y='100' width='300' height='100' fill='%23374151'/%3E%3Crect x='80' y='130' width='80' height='70' fill='%239ca3af'/%3E%3Crect x='180' y='130' width='40' height='70' fill='%236b7280'/%3E%3Crect x='240' y='130' width='80' height='70' fill='%239ca3af'/%3E%3Crect x='50' y='90' width='300' height='10' fill='%23ef4444'/%3E%3Ctext x='200' y='240' text-anchor='middle' fill='%234b5563' font-family='Arial' font-size='14'%3Eمحل تجاري%3C/text%3E%3C/svg%3E"
-            }
-        ];
+        // Properties data - empty array
+        const properties = [];
 
         // Load properties on page load
         document.addEventListener('DOMContentLoaded', function() {
-            loadProperties();
+            loadFeaturedProperties();
         });
 
-        function loadProperties() {
-            const grid = document.getElementById('properties-grid');
-            grid.innerHTML = '';
+        function loadFeaturedProperties() {
+            const container = document.getElementById('properties-container');
+            container.innerHTML = '';
             
-            properties.forEach(property => {
+            const featuredProperties = properties.filter(p => p.featured);
+            
+            if (featuredProperties.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-20">
+                        <div class="text-8xl mb-8">🏢</div>
+                        <h3 class="text-3xl font-bold text-gray-600 mb-6">لا توجد عقارات متاحة حالياً</h3>
+                        <p class="text-xl text-gray-500 mb-8">نحن نعمل على إضافة عقارات جديدة ومميزة قريباً</p>
+                        <button onclick="showNotification('سيتم إشعارك عند إضافة عقارات جديدة', 'info')" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-xl hover:shadow-xl transition-all font-semibold text-lg">
+                            إشعرني عند التوفر
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+            
+            featuredProperties.forEach(property => {
                 const propertyCard = createPropertyCard(property);
-                grid.appendChild(propertyCard);
+                container.appendChild(propertyCard);
             });
         }
 
         function createPropertyCard(property) {
             const card = document.createElement('div');
-            card.className = 'property-card bg-white rounded-xl overflow-hidden shadow-lg';
+            card.className = 'property-card bg-white rounded-2xl overflow-hidden shadow-xl';
             
             card.innerHTML = `
-                <div class="relative">
-                    <img src="${property.image}" alt="${property.title}" class="w-full h-48 object-cover">
-                    <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                <div class="relative overflow-hidden">
+                    <img src="${property.image}" alt="${property.title}" class="property-image w-full h-64 object-cover">
+                    <div class="absolute top-4 right-4 bg-gradient-to-r from-amber-500 to-orange-600 text-white px-4 py-2 rounded-full text-sm font-bold">
                         ${property.type}
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+                        عائد ${property.roi}
+                    </div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end">
+                        <div class="p-6 text-white">
+                            <p class="text-sm">استثمار مضمون</p>
+                        </div>
                     </div>
                 </div>
                 <div class="p-6">
-                    <h4 class="text-xl font-bold text-gray-800 mb-2">${property.title}</h4>
+                    <h4 class="text-xl font-bold text-gray-800 mb-3">${property.title}</h4>
                     <p class="text-gray-600 mb-4 flex items-center">
-                        <svg class="w-4 h-4 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                        <svg class="w-4 h-4 ml-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"/>
                         </svg>
                         ${property.location}
                     </p>
-                    <div class="flex justify-between items-center mb-4">
-                        <div class="text-2xl font-bold text-blue-600">${property.price} ريال</div>
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-xl font-bold text-lg">
+                            تواصل لمعرفة السعر
+                        </div>
                     </div>
-                    <div class="flex justify-between text-gray-600 text-sm mb-4">
-                        ${property.bedrooms > 0 ? `<span>${property.bedrooms} غرف نوم</span>` : '<span>-</span>'}
-                        <span>${property.bathrooms} حمام</span>
-                        <span>${property.area} م²</span>
+                    <div class="grid grid-cols-3 gap-4 text-center mb-6">
+                        ${property.bedrooms > 0 ? `
+                            <div class="bg-gray-50 p-3 rounded-lg">
+                                <div class="text-lg font-bold text-gray-800">${property.bedrooms}</div>
+                                <div class="text-xs text-gray-600">غرف نوم</div>
+                            </div>
+                        ` : '<div></div>'}
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <div class="text-lg font-bold text-gray-800">${property.bathrooms}</div>
+                            <div class="text-xs text-gray-600">حمام</div>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-lg">
+                            <div class="text-lg font-bold text-gray-800">${property.area}</div>
+                            <div class="text-xs text-gray-600">م²</div>
+                        </div>
                     </div>
-                    <button onclick="viewProperty(${property.id})" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium">
-                        عرض التفاصيل
-                    </button>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="viewPropertyDetails(${property.id})" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white py-3 rounded-lg hover:shadow-lg transition-all font-medium">
+                            تفاصيل العقار
+                        </button>
+                        <button onclick="requestConsultation(${property.id})" class="border-2 border-amber-500 text-amber-600 py-3 rounded-lg hover:bg-amber-50 transition-all font-medium">
+                            استشارة شراء
+                        </button>
+                    </div>
                 </div>
             `;
             
             return card;
         }
 
-        function searchProperties() {
-            const location = document.getElementById('location').value;
-            const type = document.getElementById('type').value;
-            const price = document.getElementById('price').value;
+        function performSearch() {
+            const location = document.getElementById('search-location').value;
+            const type = document.getElementById('search-type').value;
             
-            // Show search feedback
-            const searchButton = event.target;
-            const originalText = searchButton.textContent;
-            searchButton.textContent = 'جاري البحث...';
-            searchButton.disabled = true;
+            showNotification('جاري البحث عن العقارات المناسبة...', 'info');
             
             setTimeout(() => {
-                searchButton.textContent = originalText;
-                searchButton.disabled = false;
-                
-                // Simple search simulation
                 let filteredProperties = properties;
                 
-                if (location !== 'اختر المدينة') {
-                    filteredProperties = filteredProperties.filter(p => p.location.includes(location));
+                if (location) {
+                    filteredProperties = filteredProperties.filter(p => 
+                        p.location.toLowerCase().includes(location)
+                    );
                 }
                 
-                if (type !== 'جميع الأنواع') {
-                    filteredProperties = filteredProperties.filter(p => p.type === type);
+                if (type) {
+                    filteredProperties = filteredProperties.filter(p => 
+                        p.type === type || (type === 'villa' && p.type === 'فيلا') ||
+                        (type === 'apartment' && p.type === 'شقة') ||
+                        (type === 'office' && p.type === 'مكاتب') ||
+                        (type === 'commercial' && p.type === 'تجاري')
+                    );
                 }
                 
                 displaySearchResults(filteredProperties);
-            }, 1000);
+            }, 1500);
         }
 
         function displaySearchResults(results) {
-            const grid = document.getElementById('properties-grid');
-            grid.innerHTML = '';
+            const container = document.getElementById('properties-container');
+            container.innerHTML = '';
             
             if (results.length === 0) {
-                grid.innerHTML = `
-                    <div class="col-span-full text-center py-12">
-                        <div class="text-gray-400 text-6xl mb-4">🏠</div>
-                        <h3 class="text-xl font-bold text-gray-600 mb-2">لم نجد عقارات مطابقة</h3>
-                        <p class="text-gray-500">جرب تغيير معايير البحث</p>
-                        <button onclick="loadProperties()" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                            عرض جميع العقارات
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-16">
+                        <div class="text-6xl mb-6">🏢</div>
+                        <h3 class="text-2xl font-bold text-gray-600 mb-4">لم نجد عقارات مطابقة لبحثك</h3>
+                        <p class="text-gray-500 mb-6">جرب تعديل معايير البحث أو تصفح جميع العقارات</p>
+                        <button onclick="loadFeaturedProperties()" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-3 rounded-lg hover:shadow-lg transition-all font-medium">
+                            عرض العقارات المميزة
                         </button>
                     </div>
                 `;
@@ -535,67 +503,123 @@
             
             results.forEach(property => {
                 const propertyCard = createPropertyCard(property);
-                grid.appendChild(propertyCard);
+                container.appendChild(propertyCard);
             });
+            
+            showNotification(`تم العثور على ${results.length} عقار مطابق لبحثك`, 'success');
         }
 
-        function viewProperty(id) {
+        function loadMoreProperties() {
+            const container = document.getElementById('properties-container');
+            const allProperties = properties.filter(p => !p.featured);
+            
+            allProperties.forEach(property => {
+                const propertyCard = createPropertyCard(property);
+                container.appendChild(propertyCard);
+            });
+            
+            event.target.style.display = 'none';
+            showNotification('تم تحميل جميع العقارات المتاحة', 'success');
+        }
+
+        function viewPropertyDetails(id) {
             const property = properties.find(p => p.id === id);
             if (!property) return;
             
-            // Create modal overlay
             const modal = document.createElement('div');
-            modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4';
+            modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4';
             modal.onclick = (e) => {
                 if (e.target === modal) closeModal();
             };
             
             modal.innerHTML = `
-                <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
                     <div class="relative">
-                        <img src="${property.image}" alt="${property.title}" class="w-full h-64 object-cover rounded-t-2xl">
-                        <button onclick="closeModal()" class="absolute top-4 left-4 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full p-2 transition-all">
+                        <img src="${property.image}" alt="${property.title}" class="w-full h-80 object-cover rounded-t-3xl">
+                        <button onclick="closeModal()" class="absolute top-6 left-6 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full p-3 transition-all shadow-lg">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                             </svg>
                         </button>
-                        <div class="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-full font-medium">
+                        <div class="absolute top-6 right-6 bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-full font-bold text-lg">
                             ${property.type}
+                        </div>
+                        <div class="absolute bottom-6 right-6 bg-green-600 text-white px-4 py-2 rounded-full font-medium">
+                            عائد استثماري ${property.roi}
                         </div>
                     </div>
                     <div class="p-8">
-                        <h2 class="text-3xl font-bold text-gray-800 mb-4">${property.title}</h2>
-                        <p class="text-gray-600 mb-6 flex items-center text-lg">
-                            <svg class="w-5 h-5 ml-3" fill="currentColor" viewBox="0 0 20 20">
+                        <h2 class="text-4xl font-bold text-gray-800 mb-4">${property.title}</h2>
+                        <p class="text-gray-600 mb-6 flex items-center text-xl">
+                            <svg class="w-6 h-6 ml-3 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"/>
                             </svg>
                             ${property.location}
                         </p>
-                        <div class="text-4xl font-bold text-blue-600 mb-8">${property.price} ريال</div>
+                        <div class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-2xl font-bold text-2xl mb-8 inline-block">
+                            تواصل معنا لمعرفة السعر
+                        </div>
                         
-                        <div class="grid grid-cols-3 gap-6 mb-8">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
                             ${property.bedrooms > 0 ? `
-                                <div class="text-center p-4 bg-gray-50 rounded-lg">
-                                    <div class="text-2xl font-bold text-gray-800">${property.bedrooms}</div>
-                                    <div class="text-gray-600">غرف نوم</div>
+                                <div class="text-center p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl">
+                                    <div class="text-3xl font-bold text-blue-600">${property.bedrooms}</div>
+                                    <div class="text-gray-600 font-medium">غرف نوم</div>
                                 </div>
                             ` : ''}
-                            <div class="text-center p-4 bg-gray-50 rounded-lg">
-                                <div class="text-2xl font-bold text-gray-800">${property.bathrooms}</div>
-                                <div class="text-gray-600">حمام</div>
+                            <div class="text-center p-6 bg-gradient-to-r from-green-50 to-teal-50 rounded-xl">
+                                <div class="text-3xl font-bold text-green-600">${property.bathrooms}</div>
+                                <div class="text-gray-600 font-medium">حمام</div>
                             </div>
-                            <div class="text-center p-4 bg-gray-50 rounded-lg">
-                                <div class="text-2xl font-bold text-gray-800">${property.area}</div>
-                                <div class="text-gray-600">متر مربع</div>
+                            <div class="text-center p-6 bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl">
+                                <div class="text-3xl font-bold text-amber-600">${property.area}</div>
+                                <div class="text-gray-600 font-medium">متر مربع</div>
+                            </div>
+                            <div class="text-center p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl">
+                                <div class="text-3xl font-bold text-purple-600">${property.roi}</div>
+                                <div class="text-gray-600 font-medium">عائد سنوي</div>
                             </div>
                         </div>
                         
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <button onclick="contactAgent(${property.id})" class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors font-medium">
-                                تواصل مع الوكيل
+                        <div class="bg-gray-50 p-6 rounded-2xl mb-8">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">مميزات العقار</h3>
+                            <div class="grid grid-cols-2 gap-4 text-gray-600">
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                    </svg>
+                                    موقع استراتيجي
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                    </svg>
+                                    تشطيبات فاخرة
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                    </svg>
+                                    أمان وحراسة
+                                </div>
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 text-green-500 ml-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+                                    </svg>
+                                    مواقف سيارات
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <button onclick="scheduleVisit(${property.id})" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white py-4 px-6 rounded-xl hover:shadow-xl transition-all font-semibold">
+                                حجز موعد معاينة
                             </button>
-                            <button onclick="scheduleVisit(${property.id})" class="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition-colors font-medium">
-                                حجز موعد للمعاينة
+                            <button onclick="requestFinancing(${property.id})" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-4 px-6 rounded-xl hover:shadow-xl transition-all font-semibold">
+                                طلب تمويل للشراء
+                            </button>
+                            <button onclick="contactAgent(${property.id})" class="border-2 border-amber-500 text-amber-600 py-4 px-6 rounded-xl hover:bg-amber-50 transition-all font-semibold">
+                                استفسار عن الشراء
                             </button>
                         </div>
                     </div>
@@ -614,55 +638,129 @@
             }
         }
 
-        function contactAgent(propertyId) {
+        function scrollToProperties() {
+            document.getElementById('properties').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        function openConsultation() {
+            showNotification('سيتم توجيهك لصفحة الاستشارة المجانية...', 'info');
+            setTimeout(() => {
+                document.getElementById('contact').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }, 1000);
+        }
+
+        function requestConsultation(propertyId) {
             const property = properties.find(p => p.id === propertyId);
-            showNotification(`تم إرسال طلب التواصل بخصوص ${property.title}. سيتم التواصل معك قريباً!`, 'success');
-            closeModal();
+            showNotification(`تم طلب استشارة شراء بخصوص ${property.title}. سيتواصل معك أحد خبرائنا قريباً!`, 'success');
         }
 
         function scheduleVisit(propertyId) {
             const property = properties.find(p => p.id === propertyId);
-            showNotification(`تم حجز موعد لمعاينة ${property.title}. سنتواصل معك لتأكيد الموعد!`, 'success');
+            showNotification(`تم حجز موعد لمعاينة ${property.title}. سنتواصل معك لتأكيد الموعد خلال 24 ساعة!`, 'success');
             closeModal();
         }
 
-        function submitContact(event) {
+        function requestFinancing(propertyId) {
+            const property = properties.find(p => p.id === propertyId);
+            showNotification(`تم إرسال طلب التمويل لشراء ${property.title}. سيتواصل معك فريق التمويل قريباً!`, 'success');
+            closeModal();
+        }
+
+        function contactAgent(propertyId) {
+            const property = properties.find(p => p.id === propertyId);
+            showNotification(`تم إرسال استفسار الشراء بخصوص ${property.title}. سيتصل بك الوكيل المختص خلال ساعة!`, 'success');
+            closeModal();
+        }
+
+        function learnMore() {
+            showNotification('سيتم توجيهك لصفحة تفاصيل الشركة...', 'info');
+        }
+
+        function submitContactForm(event) {
             event.preventDefault();
             
-            const name = document.getElementById('name').value;
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
             const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
             
-            // Simulate form submission
             const submitButton = event.target.querySelector('button[type="submit"]');
             const originalText = submitButton.textContent;
             submitButton.textContent = 'جاري الإرسال...';
             submitButton.disabled = true;
+            
+            // إنشاء محتوى الإيميل
+            const emailSubject = `رسالة جديدة من موقع المستثمرون - ${subject}`;
+            const emailBody = `
+الاسم الكامل: ${firstName} ${lastName}
+البريد الإلكتروني: ${email}
+رقم الهاتف: ${phone}
+موضوع الرسالة: ${subject}
+
+الرسالة:
+${message}
+
+---
+تم إرسال هذه الرسالة من موقع المستثمرون
+            `.trim();
+            
+            // إنشاء رابط mailto
+            const mailtoLink = `mailto:theinvestors65@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            
+            // فتح تطبيق البريد الإلكتروني
+            window.open(mailtoLink, '_blank');
             
             setTimeout(() => {
                 submitButton.textContent = originalText;
                 submitButton.disabled = false;
                 
                 // Clear form
-                document.getElementById('name').value = '';
-                document.getElementById('email').value = '';
-                document.getElementById('message').value = '';
+                event.target.reset();
                 
-                showNotification('تم إرسال رسالتك بنجاح! سنتواصل معك قريباً.', 'success');
-            }, 2000);
+                showNotification(`شكراً ${firstName}! تم فتح تطبيق البريد الإلكتروني لإرسال رسالتك. يرجى الضغط على "إرسال" في تطبيق البريد.`, 'success');
+            }, 1500);
         }
+
+
 
         function showNotification(message, type = 'info') {
             const notification = document.createElement('div');
-            notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg max-w-sm transform transition-all duration-300 translate-x-full`;
+            notification.className = `fixed top-6 right-6 z-50 p-6 rounded-xl shadow-2xl max-w-md transform transition-all duration-500 translate-x-full`;
             
-            const bgColor = type === 'success' ? 'bg-green-600' : type === 'error' ? 'bg-red-600' : 'bg-blue-600';
-            notification.className += ` ${bgColor} text-white`;
+            let bgClass, iconSvg;
+            switch(type) {
+                case 'success':
+                    bgClass = 'bg-gradient-to-r from-green-500 to-emerald-600';
+                    iconSvg = '<path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>';
+                    break;
+                case 'error':
+                    bgClass = 'bg-gradient-to-r from-red-500 to-pink-600';
+                    iconSvg = '<path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/>';
+                    break;
+                default:
+                    bgClass = 'bg-gradient-to-r from-blue-500 to-purple-600';
+                    iconSvg = '<path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>';
+            }
+            
+            notification.className += ` ${bgClass} text-white`;
             
             notification.innerHTML = `
-                <div class="flex items-center">
-                    <div class="flex-1">${message}</div>
-                    <button onclick="this.parentElement.parentElement.remove()" class="mr-4 hover:bg-white hover:bg-opacity-20 rounded p-1">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                            ${iconSvg}
+                        </svg>
+                    </div>
+                    <div class="mr-3 flex-1">
+                        <p class="text-sm font-medium leading-relaxed">${message}</p>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" class="mr-2 hover:bg-white hover:bg-opacity-20 rounded-lg p-1 transition-all">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/>
                         </svg>
@@ -672,23 +770,21 @@
             
             document.body.appendChild(notification);
             
-            // Animate in
             setTimeout(() => {
                 notification.classList.remove('translate-x-full');
             }, 100);
             
-            // Auto remove after 5 seconds
             setTimeout(() => {
                 notification.classList.add('translate-x-full');
                 setTimeout(() => {
                     if (notification.parentElement) {
                         notification.parentElement.removeChild(notification);
                     }
-                }, 300);
-            }, 5000);
+                }, 500);
+            }, 6000);
         }
 
-        // Smooth scrolling for navigation links
+        // Smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -701,6 +797,16 @@
                 }
             });
         });
+
+        // Add scroll effect to navbar
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('backdrop-blur-md');
+            } else {
+                nav.classList.remove('backdrop-blur-md');
+            }
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98ffb1af653c127c',t:'MTc2MDcwMzA0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99001ecba6fd127c',t:'MTc2MDcwNzUwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
