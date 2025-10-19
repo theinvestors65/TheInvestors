@@ -17,31 +17,22 @@
         }
         
         .property-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
         }
         
         .property-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-        
-        .property-image {
-            transition: transform 0.4s ease;
-        }
-        
-        .property-card:hover .property-image {
-            transform: scale(1.1);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.25);
         }
         
         .fade-up {
-            animation: fadeUp 0.8s ease-out;
+            animation: fadeUp 0.5s ease-out;
         }
         
         @keyframes fadeUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -58,13 +49,16 @@
         
         .glass-effect {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-effect:hover {
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .nav-item {
             position: relative;
-            transition: all 0.3s ease;
         }
         
         .nav-item::after {
@@ -75,7 +69,6 @@
             width: 0;
             height: 2px;
             background: #f59e0b;
-            transition: width 0.3s ease;
         }
         
         .nav-item:hover::after {
@@ -94,7 +87,50 @@
         
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .hero-slide {
+        }
+        
+        .modal-enter {
+            animation: modalEnter 0.3s ease-out;
+        }
+        
+        @keyframes modalEnter {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .notification-enter {
+            animation: notificationSlide 0.3s ease-out;
+        }
+        
+        @keyframes notificationSlide {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .section-fade {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .section-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -109,28 +145,54 @@
                             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                         </svg>
                     </div>
-                    <h1 class="text-2xl font-bold gradient-text">المستثمرون</h1>
+                    <h1 class="text-2xl font-bold gradient-text" data-translate="company-name">المستثمرون</h1>
                 </div>
                 
                 <div class="hidden md:flex space-x-8 space-x-reverse">
-                    <a href="#" class="nav-item text-white hover:text-amber-400 font-medium">الرئيسية</a>
-                    <a href="#properties" class="nav-item text-white hover:text-amber-400 font-medium">العقارات</a>
-                    <a href="#about" class="nav-item text-white hover:text-amber-400 font-medium">خدماتنا</a>
-                    <a href="#about" class="nav-item text-white hover:text-amber-400 font-medium">من نحن</a>
-                    <a href="#contact" class="nav-item text-white hover:text-amber-400 font-medium">تواصل معنا</a>
+                    <a href="#" class="nav-item text-white hover:text-amber-400 font-medium" data-translate="nav-home">الرئيسية</a>
+                    <a href="#properties" class="nav-item text-white hover:text-amber-400 font-medium" data-translate="nav-properties">العقارات</a>
+                    <a href="#about" class="nav-item text-white hover:text-amber-400 font-medium" data-translate="nav-services">خدماتنا</a>
+                    <a href="#about" class="nav-item text-white hover:text-amber-400 font-medium" data-translate="nav-about">من نحن</a>
+                    <a href="#contact" class="nav-item text-white hover:text-amber-400 font-medium" data-translate="nav-contact">تواصل معنا</a>
                 </div>
                 
-                <button class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-xl hover:shadow-lg transition-all font-medium">
-                    انضم إلينا
-                </button>
+                <div class="relative">
+                    <button onclick="toggleLanguageMenu()" class="glass-effect text-white px-6 py-3 rounded-xl hover:bg-white hover:bg-opacity-20 transition-all font-medium flex items-center space-x-2 space-x-reverse">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+                        </svg>
+                        <span id="current-language">العربية</span>
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                        </svg>
+                    </button>
+                    <div id="language-menu" class="absolute left-0 top-full mt-2 bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden min-w-[150px] opacity-0 invisible transform scale-95 transition-all duration-200 z-50">
+                        <button onclick="changeLanguage('ar')" class="w-full px-4 py-3 text-right hover:bg-gray-50 transition-colors flex items-center space-x-3 space-x-reverse text-gray-700">
+                            <span class="font-medium">العربية</span>
+                        </button>
+                        <button onclick="changeLanguage('en')" class="w-full px-4 py-3 text-right hover:bg-gray-50 transition-colors flex items-center space-x-3 space-x-reverse text-gray-700">
+                            <span class="font-medium">English</span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="text-white min-h-screen flex items-center relative overflow-hidden">
+    <section class="hero-bg text-white min-h-screen flex items-center relative overflow-hidden">
         <div class="absolute inset-0">
-            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Modern Buildings" class="w-full h-full object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
+            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Dubai Real Estate" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <div id="hero-slider" class="w-full h-full" style="display: none;">
+                <div class="hero-slide w-full h-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 opacity-100"></div>
+                <div class="hero-slide w-full h-full bg-gradient-to-br from-blue-900 via-purple-900 to-slate-800 opacity-0 absolute inset-0"></div>
+                <div class="hero-slide w-full h-full bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-800 opacity-0 absolute inset-0"></div>
+                <div class="hero-slide w-full h-full bg-gradient-to-br from-indigo-900 via-slate-900 to-purple-800 opacity-0 absolute inset-0"></div>
+                <div class="hero-slide w-full h-full bg-gradient-to-br from-slate-800 via-gray-900 to-indigo-900 opacity-0 absolute inset-0"></div>
+                <div class="hero-slide w-full h-full bg-gradient-to-br from-gray-900 via-slate-800 to-blue-900 opacity-0 absolute inset-0"></div>
+                <div class="hero-slide w-full h-full bg-gradient-to-br from-blue-800 via-indigo-800 to-purple-900 opacity-0 absolute inset-0"></div>
+                <div class="hero-slide w-full h-full bg-gradient-to-br from-purple-800 via-blue-900 to-slate-900 opacity-0 absolute inset-0"></div>
+            </div>
             <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70"></div>
         </div>
         
@@ -138,19 +200,22 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="fade-up">
                     <h2 class="text-6xl font-black mb-6 leading-tight tracking-tight">
-                        استثمر في 
-                        <span class="gradient-text">المستقبل</span>
+                        <span data-translate="hero-title-1">استثمر في</span> 
+                        <span class="gradient-text" data-translate="hero-title-2">المستقبل</span>
                     </h2>
-                    <p class="text-xl mb-8 text-gray-300 leading-relaxed">
+                    <p class="text-xl mb-8 text-gray-300 leading-relaxed" data-translate="hero-description">
                         نحن نقدم أفضل العقارات الفاخرة للبيع والمشاريع الاستثمارية المميزة. 
                         اشتري عقارك المثالي معنا اليوم.
                     </p>
                     
 
                     
-                    <div class="flex space-x-4 space-x-reverse">
-                        <button onclick="scrollToProperties()" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-xl hover:shadow-xl transition-all font-bold text-lg tracking-wide">
+                    <div id="hero-buttons" class="flex space-x-4 space-x-reverse">
+                        <button onclick="scrollToProperties()" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-xl hover:shadow-xl font-bold text-lg tracking-wide" data-translate="hero-btn-explore">
                             استكشف العقارات
+                        </button>
+                        <button onclick="openConsultation()" class="glass-effect text-white px-8 py-4 rounded-xl hover:bg-white hover:bg-opacity-20 font-semibold text-lg" data-translate="hero-btn-consultation">
+                            استشارة مجانية
                         </button>
                     </div>
                 </div>
@@ -161,23 +226,58 @@
     </section>
 
     <!-- Featured Properties -->
-    <section id="properties" class="py-20 bg-white">
+    <section id="properties" class="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white section-fade">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h3 class="text-5xl font-black text-gray-800 mb-6 tracking-tight">العقارات المميزة للبيع</h3>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto font-medium leading-relaxed">
+            <div class="text-center mb-16 section-fade">
+                <h3 class="text-5xl font-black text-white mb-6 tracking-tight" data-translate="properties-title">العقارات المميزة للبيع</h3>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto font-medium leading-relaxed" data-translate="properties-description">
                     اكتشف مجموعة مختارة بعناية من أرقى العقارات المعروضة للبيع في أفضل المواقع
                 </p>
             </div>
             
-            <div id="properties-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Properties will be loaded here -->
-            </div>
-            
-            <div class="text-center mt-12">
-                <button onclick="loadMoreProperties()" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-xl hover:shadow-xl transition-all font-semibold">
-                    عرض المزيد من العقارات
-                </button>
+            <!-- Property Categories -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16 section-fade">
+                <!-- Oman Properties -->
+                <div class="glass-effect rounded-3xl p-8 hover:bg-white hover:bg-opacity-15">
+                    <div class="text-center mb-8">
+                        <h4 class="text-3xl font-bold text-white mb-4" data-translate="oman-properties">عقارات عُمان</h4>
+                        <p class="text-gray-300 text-lg leading-relaxed" data-translate="oman-properties-desc">
+                            استثمارات عقارية مميزة في السلطنة مع عوائد مضمونة وفرص نمو استثنائية
+                        </p>
+                    </div>
+                    
+                    <div id="oman-properties-container" class="space-y-6">
+                        <div class="text-center py-16">
+                            <div class="text-6xl mb-6">🏢</div>
+                            <h5 class="text-2xl font-bold text-gray-300 mb-4" data-translate="no-oman-properties">لا توجد عقارات متاحة حالياً</h5>
+                            <p class="text-gray-400 mb-6" data-translate="coming-soon-oman">قريباً سنعرض أفضل العقارات في عُمان</p>
+                            <button onclick="notifyOmanProperties()" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-xl hover:shadow-xl font-semibold" data-translate="notify-oman">
+                                إشعرني عند التوفر
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dubai Properties -->
+                <div class="glass-effect rounded-3xl p-8 hover:bg-white hover:bg-opacity-15">
+                    <div class="text-center mb-8">
+                        <h4 class="text-3xl font-bold text-white mb-4" data-translate="dubai-properties">عقارات دبي</h4>
+                        <p class="text-gray-300 text-lg leading-relaxed" data-translate="dubai-properties-desc">
+                            فرص استثمارية فاخرة في قلب دبي مع أعلى معدلات النمو والعائد الاستثماري
+                        </p>
+                    </div>
+                    
+                    <div id="dubai-properties-container" class="space-y-6">
+                        <div class="text-center py-16">
+                            <div class="text-6xl mb-6">🏢</div>
+                            <h5 class="text-2xl font-bold text-gray-300 mb-4" data-translate="no-dubai-properties">لا توجد عقارات متاحة حالياً</h5>
+                            <p class="text-gray-400 mb-6" data-translate="coming-soon-dubai">قريباً سنعرض أفضل العقارات في دبي</p>
+                            <button onclick="notifyDubaiProperties()" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-xl hover:shadow-xl font-semibold" data-translate="notify-dubai">
+                                إشعرني عند التوفر
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -185,44 +285,40 @@
 
 
     <!-- About Section -->
-    <section id="about" class="py-20 bg-white">
+    <section id="about" class="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white section-fade">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div>
+                <div class="section-fade">
                     <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2096&q=80" alt="Luxury Real Estate Investment" class="rounded-3xl shadow-2xl w-full h-96 object-cover" onerror="this.src=''; this.alt='Image failed to load'; this.style.display='none';">
                 </div>
                 
-                <div>
-                    <h3 class="text-5xl font-black text-gray-800 mb-8 tracking-tight">من نحن</h3>
-                    <p class="text-lg text-gray-600 mb-6 leading-relaxed font-medium">
+                <div class="section-fade">
+                    <h3 class="text-5xl font-black text-white mb-8 tracking-tight" data-translate="about-title">من نحن</h3>
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed font-medium" data-translate="about-desc-1">
                         المستثمرون هي شركة رائدة في مجال الاستثمار العقاري، تأسست على يد فريق من الخبراء 
                         المتخصصين في السوق العقاري العماني والإماراتي. نحن نؤمن بأن العقار هو أساس الثروة المستدامة.
                     </p>
-                    <p class="text-lg text-gray-600 mb-8 leading-relaxed font-medium">
+                    <p class="text-lg text-gray-300 mb-8 leading-relaxed font-medium" data-translate="about-desc-2">
                         منذ تأسيسنا، نجحنا في تحقيق عوائد استثمارية متميزة لعملائنا من خلال اختيار أفضل 
                         الفرص الاستثمارية في عمان والإمارات.
                     </p>
                     
 
-                    
-                    <button onclick="learnMore()" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-xl hover:shadow-xl transition-all font-semibold">
-                        اعرف المزيد عنا
-                    </button>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+    <section id="contact" class="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white section-fade">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16">
-                <h3 class="text-5xl font-black mb-6 tracking-tight">تواصل معنا</h3>
+            <div class="text-center mb-16 section-fade">
+                <h3 class="text-5xl font-black mb-6 tracking-tight" data-translate="contact-title">تواصل معنا</h3>
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                <div>
-                    <h4 class="text-3xl font-bold mb-8">معلومات التواصل</h4>
+                <div class="section-fade">
+                    <h4 class="text-3xl font-bold mb-8" data-translate="contact-info-title">معلومات التواصل</h4>
                     <div class="space-y-6">
                         <div class="flex items-center space-x-4 space-x-reverse">
                             <div class="bg-gradient-to-r from-amber-500 to-orange-600 p-3 rounded-full">
@@ -231,64 +327,227 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-gray-300">البريد الإلكتروني</p>
+                                <p class="text-gray-300" data-translate="email-label">البريد الإلكتروني</p>
                                 <p class="text-xl font-semibold">theinvestors65@gmail.com</p>
                             </div>
                         </div>
                         
                         <div class="flex items-center space-x-4 space-x-reverse">
-                            <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-3 rounded-full">
+                            <div class="bg-gradient-to-r from-amber-500 to-orange-600 p-3 rounded-full">
                                 <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
                                     <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-gray-300">رقم الهاتف</p>
+                                <p class="text-gray-300" data-translate="phone-label">رقم الهاتف</p>
                                 <p class="text-xl font-semibold">+968 7714 6455</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="glass-effect p-8 rounded-2xl">
+                <div class="glass-effect p-8 rounded-2xl section-fade">
                     <form onsubmit="submitContactForm(event)" class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label for="firstName" class="block text-sm font-medium mb-2">الاسم الأول</label>
-                                <input type="text" id="firstName" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300" placeholder="أدخل اسمك الأول">
+                                <label for="firstName" class="block text-sm font-medium mb-2" data-translate="first-name">الاسم الأول</label>
+                                <input type="text" id="firstName" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300" data-translate="enter-first-name" placeholder="أدخل اسمك الأول">
                             </div>
                             <div>
-                                <label for="lastName" class="block text-sm font-medium mb-2">اسم العائلة</label>
-                                <input type="text" id="lastName" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300" placeholder="أدخل اسم العائلة">
+                                <label for="lastName" class="block text-sm font-medium mb-2" data-translate="last-name">اسم العائلة</label>
+                                <input type="text" id="lastName" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300" data-translate="enter-last-name" placeholder="أدخل اسم العائلة">
                             </div>
                         </div>
                         
                         <div>
-                            <label for="email" class="block text-sm font-medium mb-2">البريد الإلكتروني</label>
-                            <input type="email" id="email" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300" placeholder="أدخل بريدك الإلكتروني">
+                            <label for="email" class="block text-sm font-medium mb-2" data-translate="email-label">البريد الإلكتروني</label>
+                            <input type="email" id="email" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300" data-translate="enter-email" placeholder="أدخل بريدك الإلكتروني">
                         </div>
                         
                         <div>
-                            <label for="phone" class="block text-sm font-medium mb-2">رقم الهاتف</label>
-                            <input type="tel" id="phone" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300" placeholder="أدخل رقم هاتفك">
+                            <label for="phone" class="block text-sm font-medium mb-2" data-translate="phone-number">رقم الهاتف</label>
+                            <div class="flex gap-3">
+                                <select id="country-code" class="w-32 p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white text-sm">
+                                    <!-- دول الخليج العربي -->
+                                    <option value="+968" class="text-gray-800">عُمان +968</option>
+                                    <option value="+971" class="text-gray-800">الإمارات +971</option>
+                                    <option value="+966" class="text-gray-800">السعودية +966</option>
+                                    <option value="+965" class="text-gray-800">الكويت +965</option>
+                                    <option value="+974" class="text-gray-800">قطر +974</option>
+                                    <option value="+973" class="text-gray-800">البحرين +973</option>
+                                    
+                                    <!-- الدول العربية -->
+                                    <option value="+20" class="text-gray-800">مصر +20</option>
+                                    <option value="+962" class="text-gray-800">الأردن +962</option>
+                                    <option value="+961" class="text-gray-800">لبنان +961</option>
+                                    <option value="+963" class="text-gray-800">سوريا +963</option>
+                                    <option value="+964" class="text-gray-800">العراق +964</option>
+                                    <option value="+212" class="text-gray-800">المغرب +212</option>
+                                    <option value="+213" class="text-gray-800">الجزائر +213</option>
+                                    <option value="+216" class="text-gray-800">تونس +216</option>
+                                    <option value="+218" class="text-gray-800">ليبيا +218</option>
+                                    <option value="+249" class="text-gray-800">السودان +249</option>
+                                    <option value="+967" class="text-gray-800">اليمن +967</option>
+                                    <option value="+222" class="text-gray-800">موريتانيا +222</option>
+                                    <option value="+253" class="text-gray-800">جيبوتي +253</option>
+                                    <option value="+252" class="text-gray-800">الصومال +252</option>
+                                    <option value="+970" class="text-gray-800">فلسطين +970</option>
+                                    
+                                    <!-- أوروبا -->
+                                    <option value="+44" class="text-gray-800">بريطانيا +44</option>
+                                    <option value="+33" class="text-gray-800">فرنسا +33</option>
+                                    <option value="+49" class="text-gray-800">ألمانيا +49</option>
+                                    <option value="+39" class="text-gray-800">إيطاليا +39</option>
+                                    <option value="+34" class="text-gray-800">إسبانيا +34</option>
+                                    <option value="+31" class="text-gray-800">هولندا +31</option>
+                                    <option value="+32" class="text-gray-800">بلجيكا +32</option>
+                                    <option value="+41" class="text-gray-800">سويسرا +41</option>
+                                    <option value="+43" class="text-gray-800">النمسا +43</option>
+                                    <option value="+46" class="text-gray-800">السويد +46</option>
+                                    <option value="+47" class="text-gray-800">النرويج +47</option>
+                                    <option value="+45" class="text-gray-800">الدنمارك +45</option>
+                                    <option value="+358" class="text-gray-800">فنلندا +358</option>
+                                    <option value="+351" class="text-gray-800">البرتغال +351</option>
+                                    <option value="+30" class="text-gray-800">اليونان +30</option>
+                                    <option value="+7" class="text-gray-800">روسيا +7</option>
+                                    <option value="+380" class="text-gray-800">أوكرانيا +380</option>
+                                    <option value="+48" class="text-gray-800">بولندا +48</option>
+                                    <option value="+420" class="text-gray-800">التشيك +420</option>
+                                    <option value="+36" class="text-gray-800">المجر +36</option>
+                                    <option value="+40" class="text-gray-800">رومانيا +40</option>
+                                    <option value="+359" class="text-gray-800">بلغاريا +359</option>
+                                    <option value="+385" class="text-gray-800">كرواتيا +385</option>
+                                    <option value="+381" class="text-gray-800">صربيا +381</option>
+                                    <option value="+353" class="text-gray-800">أيرلندا +353</option>
+                                    
+                                    <!-- آسيا -->
+                                    <option value="+91" class="text-gray-800">الهند +91</option>
+                                    <option value="+86" class="text-gray-800">الصين +86</option>
+                                    <option value="+81" class="text-gray-800">اليابان +81</option>
+                                    <option value="+82" class="text-gray-800">كوريا الجنوبية +82</option>
+                                    <option value="+60" class="text-gray-800">ماليزيا +60</option>
+                                    <option value="+65" class="text-gray-800">سنغافورة +65</option>
+                                    <option value="+66" class="text-gray-800">تايلاند +66</option>
+                                    <option value="+84" class="text-gray-800">فيتنام +84</option>
+                                    <option value="+62" class="text-gray-800">إندونيسيا +62</option>
+                                    <option value="+63" class="text-gray-800">الفلبين +63</option>
+                                    <option value="+92" class="text-gray-800">باكستان +92</option>
+                                    <option value="+880" class="text-gray-800">بنغلاديش +880</option>
+                                    <option value="+94" class="text-gray-800">سريلانكا +94</option>
+                                    <option value="+98" class="text-gray-800">إيران +98</option>
+                                    <option value="+90" class="text-gray-800">تركيا +90</option>
+                                    <option value="+972" class="text-gray-800">إسرائيل +972</option>
+                                    <option value="+995" class="text-gray-800">جورجيا +995</option>
+                                    <option value="+374" class="text-gray-800">أرمينيا +374</option>
+                                    <option value="+994" class="text-gray-800">أذربيجان +994</option>
+                                    <option value="+993" class="text-gray-800">تركمانستان +993</option>
+                                    <option value="+992" class="text-gray-800">طاجيكستان +992</option>
+                                    <option value="+996" class="text-gray-800">قيرغيزستان +996</option>
+                                    <option value="+998" class="text-gray-800">أوزبكستان +998</option>
+                                    <option value="+7" class="text-gray-800">كازاخستان +7</option>
+                                    <option value="+93" class="text-gray-800">أفغانستان +93</option>
+                                    <option value="+977" class="text-gray-800">نيبال +977</option>
+                                    <option value="+975" class="text-gray-800">بوتان +975</option>
+                                    <option value="+960" class="text-gray-800">المالديف +960</option>
+                                    
+                                    <!-- أمريكا الشمالية -->
+                                    <option value="+1" class="text-gray-800">أمريكا +1</option>
+                                    <option value="+1" class="text-gray-800">كندا +1</option>
+                                    <option value="+52" class="text-gray-800">المكسيك +52</option>
+                                    
+                                    <!-- أمريكا الجنوبية -->
+                                    <option value="+55" class="text-gray-800">البرازيل +55</option>
+                                    <option value="+54" class="text-gray-800">الأرجنتين +54</option>
+                                    <option value="+56" class="text-gray-800">تشيلي +56</option>
+                                    <option value="+57" class="text-gray-800">كولومبيا +57</option>
+                                    <option value="+51" class="text-gray-800">بيرو +51</option>
+                                    <option value="+58" class="text-gray-800">فنزويلا +58</option>
+                                    <option value="+593" class="text-gray-800">الإكوادور +593</option>
+                                    <option value="+595" class="text-gray-800">باراغواي +595</option>
+                                    <option value="+598" class="text-gray-800">أوروغواي +598</option>
+                                    <option value="+591" class="text-gray-800">بوليفيا +591</option>
+                                    <option value="+592" class="text-gray-800">غيانا +592</option>
+                                    <option value="+597" class="text-gray-800">سورينام +597</option>
+                                    
+                                    <!-- أفريقيا -->
+                                    <option value="+27" class="text-gray-800">جنوب أفريقيا +27</option>
+                                    <option value="+234" class="text-gray-800">نيجيريا +234</option>
+                                    <option value="+254" class="text-gray-800">كينيا +254</option>
+                                    <option value="+233" class="text-gray-800">غانا +233</option>
+                                    <option value="+251" class="text-gray-800">إثيوبيا +251</option>
+                                    <option value="+256" class="text-gray-800">أوغندا +256</option>
+                                    <option value="+255" class="text-gray-800">تنزانيا +255</option>
+                                    <option value="+260" class="text-gray-800">زامبيا +260</option>
+                                    <option value="+263" class="text-gray-800">زيمبابوي +263</option>
+                                    <option value="+267" class="text-gray-800">بوتسوانا +267</option>
+                                    <option value="+264" class="text-gray-800">ناميبيا +264</option>
+                                    <option value="+258" class="text-gray-800">موزمبيق +258</option>
+                                    <option value="+261" class="text-gray-800">مدغشقر +261</option>
+                                    <option value="+230" class="text-gray-800">موريشيوس +230</option>
+                                    <option value="+248" class="text-gray-800">سيشل +248</option>
+                                    <option value="+221" class="text-gray-800">السنغال +221</option>
+                                    <option value="+223" class="text-gray-800">مالي +223</option>
+                                    <option value="+226" class="text-gray-800">بوركينا فاسو +226</option>
+                                    <option value="+227" class="text-gray-800">النيجر +227</option>
+                                    <option value="+235" class="text-gray-800">تشاد +235</option>
+                                    <option value="+236" class="text-gray-800">أفريقيا الوسطى +236</option>
+                                    <option value="+237" class="text-gray-800">الكاميرون +237</option>
+                                    <option value="+240" class="text-gray-800">غينيا الاستوائية +240</option>
+                                    <option value="+241" class="text-gray-800">الغابون +241</option>
+                                    <option value="+242" class="text-gray-800">الكونغو +242</option>
+                                    <option value="+243" class="text-gray-800">الكونغو الديمقراطية +243</option>
+                                    <option value="+244" class="text-gray-800">أنغولا +244</option>
+                                    <option value="+245" class="text-gray-800">غينيا بيساو +245</option>
+                                    <option value="+220" class="text-gray-800">غامبيا +220</option>
+                                    <option value="+224" class="text-gray-800">غينيا +224</option>
+                                    <option value="+225" class="text-gray-800">ساحل العاج +225</option>
+                                    <option value="+231" class="text-gray-800">ليبيريا +231</option>
+                                    <option value="+232" class="text-gray-800">سيراليون +232</option>
+                                    <option value="+238" class="text-gray-800">الرأس الأخضر +238</option>
+                                    <option value="+239" class="text-gray-800">ساو تومي +239</option>
+                                    <option value="+250" class="text-gray-800">رواندا +250</option>
+                                    <option value="+257" class="text-gray-800">بوروندي +257</option>
+                                    <option value="+268" class="text-gray-800">إسواتيني +268</option>
+                                    <option value="+266" class="text-gray-800">ليسوتو +266</option>
+                                    <option value="+265" class="text-gray-800">مالاوي +265</option>
+                                    <option value="+269" class="text-gray-800">جزر القمر +269</option>
+                                    
+                                    <!-- أوقيانوسيا -->
+                                    <option value="+61" class="text-gray-800">أستراليا +61</option>
+                                    <option value="+64" class="text-gray-800">نيوزيلندا +64</option>
+                                    <option value="+679" class="text-gray-800">فيجي +679</option>
+                                    <option value="+685" class="text-gray-800">ساموا +685</option>
+                                    <option value="+676" class="text-gray-800">تونغا +676</option>
+                                    <option value="+678" class="text-gray-800">فانواتو +678</option>
+                                    <option value="+677" class="text-gray-800">جزر سليمان +677</option>
+                                    <option value="+675" class="text-gray-800">بابوا غينيا الجديدة +675</option>
+                                    <option value="+686" class="text-gray-800">كيريباتي +686</option>
+                                    <option value="+674" class="text-gray-800">ناورو +674</option>
+                                    <option value="+688" class="text-gray-800">توفالو +688</option>
+                                    <option value="+680" class="text-gray-800">بالاو +680</option>
+                                    <option value="+691" class="text-gray-800">ميكرونيسيا +691</option>
+                                    <option value="+692" class="text-gray-800">جزر مارشال +692</option>
+                                </select>
+                                <input type="tel" id="phone" required class="flex-1 p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300" data-translate="enter-phone" placeholder="أدخل رقم هاتفك">
+                            </div>
                         </div>
                         
                         <div>
-                            <label for="subject" class="block text-sm font-medium mb-2">موضوع الرسالة</label>
+                            <label for="subject" class="block text-sm font-medium mb-2" data-translate="message-subject">الخيارات</label>
                             <select id="subject" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white">
-                                <option value="" class="text-gray-800">اختر الموضوع</option>
-                                <option value="buying" class="text-gray-800">شراء عقار</option>
-                                <option value="selling" class="text-gray-800">بيع عقار</option>
-                                <option value="other" class="text-gray-800">أخرى</option>
+                                <option value="" class="text-gray-800" data-translate="choose-subject">اختر الخيار</option>
+                                <option value="buying" class="text-gray-800" data-translate="buying-property">شراء عقار</option>
+                                <option value="selling" class="text-gray-800" data-translate="selling-property">بيع عقار</option>
+                                <option value="other" class="text-gray-800" data-translate="other">أخرى</option>
                             </select>
                         </div>
                         
                         <div>
-                            <label for="message" class="block text-sm font-medium mb-2">الرسالة</label>
-                            <textarea id="message" rows="4" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300" placeholder="اكتب رسالتك هنا..."></textarea>
+                            <label for="message" class="block text-sm font-medium mb-2" data-translate="message-text">الرسالة</label>
+                            <textarea id="message" rows="4" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300" data-translate="enter-message" placeholder="اكتب رسالتك هنا..."></textarea>
                         </div>
                         
-                        <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-white p-4 rounded-lg hover:shadow-xl transition-all font-semibold text-lg">
+                        <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-orange-600 text-white p-4 rounded-lg hover:shadow-xl font-semibold text-lg" data-translate="send-message">
                             إرسال الرسالة
                         </button>
                     </form>
@@ -308,21 +567,21 @@
                                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
                             </svg>
                         </div>
-                        <h5 class="text-xl font-bold gradient-text">المستثمرون</h5>
+                        <h5 class="text-xl font-bold gradient-text" data-translate="company-name">المستثمرون</h5>
                     </div>
-                    <p class="text-gray-400 mb-4">شريكك الموثوق في عالم الاستثمار العقاري</p>
+                    <p class="text-gray-400 mb-4" data-translate="company-tagline">شريكك الموثوق في عالم الاستثمار العقاري</p>
                     <div class="flex space-x-4 space-x-reverse">
-                        <a href="#" class="bg-gray-800 p-2 rounded-lg hover:bg-amber-600 transition-colors">
+                        <a href="#" class="bg-gray-800 p-2 rounded-lg hover:bg-amber-600">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
                             </svg>
                         </a>
-                        <a href="#" class="bg-gray-800 p-2 rounded-lg hover:bg-amber-600 transition-colors">
+                        <a href="#" class="bg-gray-800 p-2 rounded-lg hover:bg-amber-600">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
                             </svg>
                         </a>
-                        <a href="#" class="bg-gray-800 p-2 rounded-lg hover:bg-amber-600 transition-colors">
+                        <a href="#" class="bg-gray-800 p-2 rounded-lg hover:bg-amber-600">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001.012.001z"/>
                             </svg>
@@ -331,29 +590,27 @@
                 </div>
                 
                 <div>
-                    <h6 class="font-bold mb-4 text-lg">روابط سريعة</h6>
+                    <h6 class="font-bold mb-4 text-lg" data-translate="quick-links">روابط سريعة</h6>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-amber-400 transition-colors">الرئيسية</a></li>
-                        <li><a href="#properties" class="hover:text-amber-400 transition-colors">العقارات</a></li>
-                        <li><a href="#about" class="hover:text-amber-400 transition-colors">الخدمات</a></li>
-                        <li><a href="#about" class="hover:text-amber-400 transition-colors">من نحن</a></li>
-                        <li><a href="#contact" class="hover:text-amber-400 transition-colors">تواصل معنا</a></li>
+                        <li><a href="#" class="hover:text-amber-400" data-translate="nav-home">الرئيسية</a></li>
+                        <li><a href="#properties" class="hover:text-amber-400" data-translate="nav-properties">العقارات</a></li>
+                        <li><a href="#about" class="hover:text-amber-400" data-translate="nav-about">من نحن</a></li>
+                        <li><a href="#contact" class="hover:text-amber-400" data-translate="nav-contact">تواصل معنا</a></li>
                     </ul>
                 </div>
                 
                 <div>
-                    <h6 class="font-bold mb-4 text-lg">خدماتنا</h6>
+                    <h6 class="font-bold mb-4 text-lg" data-translate="our-services">خدماتنا</h6>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-amber-400 transition-colors">بيع العقارات</a></li>
-                        <li><a href="#" class="hover:text-amber-400 transition-colors">شراء العقارات</a></li>
+                        <li><a href="#" class="hover:text-amber-400" data-translate="property-selling">بيع العقارات</a></li>
+                        <li><a href="#" class="hover:text-amber-400" data-translate="property-buying">شراء العقارات</a></li>
+                        <li><a href="#" class="hover:text-amber-400" data-translate="investment-consulting">استشارات عقارية</a></li>
                     </ul>
                 </div>
-                
-
             </div>
             
             <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-                <p>&copy; 2024 المستثمرون. جميع الحقوق محفوظة. | تصميم وتطوير فريق المستثمرون</p>
+                <p>&copy; 2024 المستثمرون. <span data-translate="footer-rights">جميع الحقوق محفوظة. | تصميم وتطوير فريق المستثمرون</span></p>
             </div>
         </div>
     </footer>
@@ -365,7 +622,30 @@
         // Load properties on page load
         document.addEventListener('DOMContentLoaded', function() {
             loadFeaturedProperties();
+            initHeroSlider();
+            initScrollAnimations();
         });
+
+        // Initialize scroll-triggered animations
+        function initScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all elements with section-fade class
+            document.querySelectorAll('.section-fade').forEach(el => {
+                observer.observe(el);
+            });
+        }
 
         function loadFeaturedProperties() {
             const container = document.getElementById('properties-container');
@@ -377,10 +657,10 @@
                 container.innerHTML = `
                     <div class="col-span-full text-center py-20">
                         <div class="text-8xl mb-8">🏢</div>
-                        <h3 class="text-3xl font-bold text-gray-600 mb-6">لا توجد عقارات متاحة حالياً</h3>
-                        <p class="text-xl text-gray-500 mb-8">نحن نعمل على إضافة عقارات جديدة ومميزة قريباً</p>
-                        <button onclick="showNotification('سيتم إشعارك عند إضافة عقارات جديدة', 'info')" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-xl hover:shadow-xl transition-all font-semibold text-lg">
-                            إشعرني عند التوفر
+                        <h3 class="text-3xl font-bold text-gray-600 mb-6">${getTranslation('no-properties-title')}</h3>
+                        <p class="text-xl text-gray-500 mb-8">${getTranslation('no-properties-desc')}</p>
+                        <button onclick="showNotification('${getTranslation('notify-btn')}', 'info')" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-8 py-4 rounded-xl hover:shadow-xl transition-all font-semibold text-lg">
+                            ${getTranslation('notify-btn')}
                         </button>
                     </div>
                 `;
@@ -404,11 +684,11 @@
                         ${property.type}
                     </div>
                     <div class="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                        عائد ${property.roi}
+                        ${getTranslation('annual-return')} ${property.roi}
                     </div>
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end">
                         <div class="p-6 text-white">
-                            <p class="text-sm">استثمار مضمون</p>
+                            <p class="text-sm">${getTranslation('guaranteed-investment')}</p>
                         </div>
                     </div>
                 </div>
@@ -422,31 +702,31 @@
                     </p>
                     <div class="flex justify-between items-center mb-6">
                         <div class="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-xl font-bold text-lg">
-                            تواصل لمعرفة السعر
+                            ${getTranslation('contact-price')}
                         </div>
                     </div>
                     <div class="grid grid-cols-3 gap-4 text-center mb-6">
                         ${property.bedrooms > 0 ? `
                             <div class="bg-gray-50 p-3 rounded-lg">
                                 <div class="text-lg font-bold text-gray-800">${property.bedrooms}</div>
-                                <div class="text-xs text-gray-600">غرف نوم</div>
+                                <div class="text-xs text-gray-600">${getTranslation('bedrooms')}</div>
                             </div>
                         ` : '<div></div>'}
                         <div class="bg-gray-50 p-3 rounded-lg">
                             <div class="text-lg font-bold text-gray-800">${property.bathrooms}</div>
-                            <div class="text-xs text-gray-600">حمام</div>
+                            <div class="text-xs text-gray-600">${getTranslation('bathrooms')}</div>
                         </div>
                         <div class="bg-gray-50 p-3 rounded-lg">
                             <div class="text-lg font-bold text-gray-800">${property.area}</div>
-                            <div class="text-xs text-gray-600">م²</div>
+                            <div class="text-xs text-gray-600">${getTranslation('area-unit')}</div>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                         <button onclick="viewPropertyDetails(${property.id})" class="bg-gradient-to-r from-amber-500 to-orange-600 text-white py-3 rounded-lg hover:shadow-lg transition-all font-medium">
-                            تفاصيل العقار
+                            ${getTranslation('property-details')}
                         </button>
                         <button onclick="requestConsultation(${property.id})" class="border-2 border-amber-500 text-amber-600 py-3 rounded-lg hover:bg-amber-50 transition-all font-medium">
-                            استشارة شراء
+                            ${getTranslation('buy-consultation')}
                         </button>
                     </div>
                 </div>
@@ -522,6 +802,14 @@
             showNotification('تم تحميل جميع العقارات المتاحة', 'success');
         }
 
+        function notifyOmanProperties() {
+            showNotification('شكراً لك! سيتم إشعارك فور توفر عقارات جديدة في عُمان', 'success');
+        }
+
+        function notifyDubaiProperties() {
+            showNotification('شكراً لك! سيتم إشعارك فور توفر عقارات جديدة في دبي', 'success');
+        }
+
         function viewPropertyDetails(id) {
             const property = properties.find(p => p.id === id);
             if (!property) return;
@@ -533,7 +821,7 @@
             };
             
             modal.innerHTML = `
-                <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+                <div class="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto modal-enter">
                     <div class="relative">
                         <img src="${property.image}" alt="${property.title}" class="w-full h-80 object-cover rounded-t-3xl">
                         <button onclick="closeModal()" class="absolute top-6 left-6 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full p-3 transition-all shadow-lg">
@@ -639,7 +927,12 @@
         }
 
         function scrollToProperties() {
-            document.getElementById('properties').scrollIntoView({
+            const target = document.getElementById('properties');
+            const navHeight = document.querySelector('nav').offsetHeight;
+            const targetPosition = target.offsetTop - navHeight - 20;
+            
+            window.scrollTo({
+                top: targetPosition,
                 behavior: 'smooth'
             });
         }
@@ -647,10 +940,15 @@
         function openConsultation() {
             showNotification('سيتم توجيهك لصفحة الاستشارة المجانية...', 'info');
             setTimeout(() => {
-                document.getElementById('contact').scrollIntoView({
+                const target = document.getElementById('contact');
+                const navHeight = document.querySelector('nav').offsetHeight;
+                const targetPosition = target.offsetTop - navHeight - 20;
+                
+                window.scrollTo({
+                    top: targetPosition,
                     behavior: 'smooth'
                 });
-            }, 1000);
+            }, 1200);
         }
 
         function requestConsultation(propertyId) {
@@ -686,7 +984,9 @@
             const firstName = document.getElementById('firstName').value;
             const lastName = document.getElementById('lastName').value;
             const email = document.getElementById('email').value;
+            const countryCode = document.getElementById('country-code').value;
             const phone = document.getElementById('phone').value;
+            const fullPhone = countryCode + ' ' + phone;
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
             
@@ -700,8 +1000,8 @@
             const emailBody = `
 الاسم الكامل: ${firstName} ${lastName}
 البريد الإلكتروني: ${email}
-رقم الهاتف: ${phone}
-موضوع الرسالة: ${subject}
+رقم الهاتف: ${fullPhone}
+الخيار المحدد: ${subject}
 
 الرسالة:
 ${message}
@@ -727,11 +1027,24 @@ ${message}
             }, 1500);
         }
 
-
+        // Hero image slider function
+        function initHeroSlider() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.hero-slide');
+            
+            function nextSlide() {
+                slides[currentSlide].style.opacity = '0';
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].style.opacity = '1';
+            }
+            
+            // Change slide every 4 seconds
+            setInterval(nextSlide, 4000);
+        }
 
         function showNotification(message, type = 'info') {
             const notification = document.createElement('div');
-            notification.className = `fixed top-6 right-6 z-50 p-6 rounded-xl shadow-2xl max-w-md transform transition-all duration-500 translate-x-full`;
+            notification.className = `fixed top-6 right-6 z-50 p-6 rounded-xl shadow-2xl max-w-md transform notification-enter`;
             
             let bgClass, iconSvg;
             switch(type) {
@@ -760,7 +1073,7 @@ ${message}
                     <div class="mr-3 flex-1">
                         <p class="text-sm font-medium leading-relaxed">${message}</p>
                     </div>
-                    <button onclick="this.parentElement.parentElement.remove()" class="mr-2 hover:bg-white hover:bg-opacity-20 rounded-lg p-1 transition-all">
+                    <button onclick="this.parentElement.parentElement.remove()" class="mr-2 hover:bg-white hover:bg-opacity-20 rounded-lg p-1">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/>
                         </svg>
@@ -771,28 +1084,25 @@ ${message}
             document.body.appendChild(notification);
             
             setTimeout(() => {
-                notification.classList.remove('translate-x-full');
-            }, 100);
-            
-            setTimeout(() => {
-                notification.classList.add('translate-x-full');
-                setTimeout(() => {
-                    if (notification.parentElement) {
-                        notification.parentElement.removeChild(notification);
-                    }
-                }, 500);
-            }, 6000);
+                if (notification.parentElement) {
+                    notification.parentElement.removeChild(notification);
+                }
+            }, 5000);
         }
 
-        // Smooth scrolling for navigation
+        // Enhanced smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    // Add smooth scroll with offset for fixed navbar
+                    const navHeight = document.querySelector('nav').offsetHeight;
+                    const targetPosition = target.offsetTop - navHeight - 20;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
                     });
                 }
             });
@@ -807,6 +1117,286 @@ ${message}
                 nav.classList.remove('backdrop-blur-md');
             }
         });
+
+        // Translation data
+        const translations = {
+            ar: {
+                // Company Name
+                'company-name': 'المستثمرون',
+                
+                // Navigation
+                'nav-home': 'الرئيسية',
+                'nav-properties': 'العقارات',
+                'nav-services': 'خدماتنا',
+                'nav-about': 'من نحن',
+                'nav-contact': 'تواصل معنا',
+                'current-language': 'العربية',
+                
+                // Hero Section
+                'hero-title-1': 'استثمر في',
+                'hero-title-2': 'المستقبل',
+                'hero-description': 'نحن نقدم أفضل العقارات الفاخرة للبيع والمشاريع الاستثمارية المميزة. اشتري عقارك المثالي معنا اليوم.',
+                'hero-btn-explore': 'استكشف العقارات',
+                'hero-btn-consultation': 'استشارة مجانية',
+                
+                // Properties Section
+                'properties-title': 'العقارات المميزة للبيع',
+                'properties-description': 'اكتشف مجموعة مختارة بعناية من أرقى العقارات المعروضة للبيع في أفضل المواقع',
+                'load-more-btn': 'عرض المزيد من العقارات',
+                'no-properties-title': 'لا توجد عقارات متاحة حالياً',
+                'no-properties-desc': 'نحن نعمل على إضافة عقارات جديدة ومميزة قريباً',
+                'notify-btn': 'إشعرني عند التوفر',
+                'contact-price': 'تواصل لمعرفة السعر',
+                'bedrooms': 'غرف نوم',
+                'bathrooms': 'حمام',
+                'area-unit': 'م²',
+                'property-details': 'تفاصيل العقار',
+                'buy-consultation': 'استشارة شراء',
+                'annual-return': 'عائد',
+                'guaranteed-investment': 'استثمار مضمون',
+                
+                // About Section
+                'about-title': 'من نحن',
+                'about-desc-1': 'المستثمرون هي شركة رائدة في مجال الاستثمار العقاري، تأسست على يد فريق من الخبراء المتخصصين في السوق العقاري العماني والإماراتي. نحن نؤمن بأن العقار هو أساس الثروة المستدامة.',
+                'about-desc-2': 'منذ تأسيسنا، نجحنا في تحقيق عوائد استثمارية متميزة لعملائنا من خلال اختيار أفضل الفرص الاستثمارية في عمان والإمارات.',
+                'years-experience': 'سنوات خبرة',
+                'customer-satisfaction': 'رضا العملاء',
+                'learn-more-btn': 'اعرف المزيد عنا',
+                
+                // Contact Section
+                'contact-title': 'تواصل معنا',
+                'contact-info-title': 'معلومات التواصل',
+                'email-label': 'البريد الإلكتروني',
+                'phone-label': 'رقم الهاتف',
+                'first-name': 'الاسم الأول',
+                'last-name': 'اسم العائلة',
+                'phone-number': 'رقم الهاتف',
+                'message-subject': 'الخيارات',
+                'message-text': 'الرسالة',
+                'send-message': 'إرسال الرسالة',
+                'choose-subject': 'اختر الخيار',
+                'buying-property': 'شراء عقار',
+                'selling-property': 'بيع عقار',
+                'other': 'أخرى',
+                'enter-first-name': 'أدخل اسمك الأول',
+                'enter-last-name': 'أدخل اسم العائلة',
+                'enter-email': 'أدخل بريدك الإلكتروني',
+                'enter-phone': 'أدخل رقم هاتفك',
+                'enter-message': 'اكتب رسالتك هنا...',
+                
+                // Footer
+                'quick-links': 'روابط سريعة',
+                'our-services': 'خدماتنا',
+                'property-selling': 'بيع العقارات',
+                'property-buying': 'شراء العقارات',
+                'investment-consulting': 'استشارات عقارية',
+                'footer-rights': 'جميع الحقوق محفوظة. | تصميم وتطوير فريق المستثمرون',
+                'company-tagline': 'شريكك الموثوق في عالم الاستثمار العقاري',
+                
+                // Property Details Modal
+                'schedule-visit': 'حجز موعد معاينة',
+                'request-financing': 'طلب تمويل للشراء',
+                'contact-agent': 'استفسار عن الشراء',
+                'property-features': 'مميزات العقار',
+                'strategic-location': 'موقع استراتيجي',
+                'luxury-finishes': 'تشطيبات فاخرة',
+                'security-guard': 'أمان وحراسة',
+                'parking-spaces': 'مواقف سيارات',
+                'square-meters': 'متر مربع',
+                'annual-return-full': 'عائد سنوي',
+                
+                // Property Categories
+                'oman-properties': 'عقارات عُمان',
+                'oman-properties-desc': 'استثمارات عقارية مميزة في السلطنة مع عوائد مضمونة وفرص نمو استثنائية',
+                'dubai-properties': 'عقارات دبي',
+                'dubai-properties-desc': 'فرص استثمارية فاخرة في قلب دبي مع أعلى معدلات النمو والعائد الاستثماري',
+                'no-oman-properties': 'لا توجد عقارات متاحة حالياً',
+                'coming-soon-oman': 'قريباً سنعرض أفضل العقارات في عُمان',
+                'notify-oman': 'إشعرني عند التوفر',
+                'no-dubai-properties': 'لا توجد عقارات متاحة حالياً',
+                'coming-soon-dubai': 'قريباً سنعرض أفضل العقارات في دبي',
+                'notify-dubai': 'إشعرني عند التوفر'
+            },
+            en: {
+                // Company Name
+                'company-name': 'The Investors',
+                
+                // Navigation
+                'nav-home': 'Home',
+                'nav-properties': 'Properties',
+                'nav-services': 'Services',
+                'nav-about': 'About Us',
+                'nav-contact': 'Contact Us',
+                'current-language': 'English',
+                
+                // Hero Section
+                'hero-title-1': 'Invest in the',
+                'hero-title-2': 'Future',
+                'hero-description': 'We offer the finest luxury properties for sale and distinguished investment projects. Buy your perfect property with us today.',
+                'hero-btn-explore': 'Explore Properties',
+                'hero-btn-consultation': 'Free Consultation',
+                
+                // Properties Section
+                'properties-title': 'Featured Properties for Sale',
+                'properties-description': 'Discover a carefully selected collection of the finest properties for sale in the best locations',
+                'load-more-btn': 'Load More Properties',
+                'no-properties-title': 'No Properties Available Currently',
+                'no-properties-desc': 'We are working on adding new and distinctive properties soon',
+                'notify-btn': 'Notify Me When Available',
+                'contact-price': 'Contact for Price',
+                'bedrooms': 'Bedrooms',
+                'bathrooms': 'Bathrooms',
+                'area-unit': 'sqm',
+                'property-details': 'Property Details',
+                'buy-consultation': 'Buy Consultation',
+                'annual-return': 'Return',
+                'guaranteed-investment': 'Guaranteed Investment',
+                
+                // About Section
+                'about-title': 'About Us',
+                'about-desc-1': 'Al-Mustathmirun is a leading company in real estate investment, founded by a team of experts specialized in the Omani and UAE real estate markets. We believe that real estate is the foundation of sustainable wealth.',
+                'about-desc-2': 'Since our establishment, we have succeeded in achieving outstanding investment returns for our clients by selecting the best investment opportunities in Oman and the UAE.',
+                'years-experience': 'Years Experience',
+                'customer-satisfaction': 'Customer Satisfaction',
+                'learn-more-btn': 'Learn More About Us',
+                
+                // Contact Section
+                'contact-title': 'Contact Us',
+                'contact-info-title': 'Contact Information',
+                'email-label': 'Email',
+                'phone-label': 'Phone Number',
+                'first-name': 'First Name',
+                'last-name': 'Last Name',
+                'phone-number': 'Phone Number',
+                'message-subject': 'Options',
+                'message-text': 'Message',
+                'send-message': 'Send Message',
+                'choose-subject': 'Choose Option',
+                'buying-property': 'Buying Property',
+                'selling-property': 'Selling Property',
+                'other': 'Other',
+                'enter-first-name': 'Enter your first name',
+                'enter-last-name': 'Enter your last name',
+                'enter-email': 'Enter your email',
+                'enter-phone': 'Enter your phone number',
+                'enter-message': 'Write your message here...',
+                
+                // Footer
+                'quick-links': 'Quick Links',
+                'our-services': 'Our Services',
+                'property-selling': 'Property Selling',
+                'property-buying': 'Property Buying',
+                'investment-consulting': 'Real Estate Consulting',
+                'footer-rights': 'All rights reserved. | Designed and developed by Al-Mustathmirun team',
+                'company-tagline': 'Your trusted partner in real estate investment',
+                
+                // Property Details Modal
+                'schedule-visit': 'Schedule Visit',
+                'request-financing': 'Request Financing',
+                'contact-agent': 'Contact Agent',
+                'property-features': 'Property Features',
+                'strategic-location': 'Strategic Location',
+                'luxury-finishes': 'Luxury Finishes',
+                'security-guard': 'Security & Guard',
+                'parking-spaces': 'Parking Spaces',
+                'square-meters': 'square meters',
+                'annual-return-full': 'Annual Return',
+                
+                // Property Categories
+                'oman-properties': 'Oman Properties',
+                'oman-properties-desc': 'Distinguished real estate investments in the Sultanate with guaranteed returns and exceptional growth opportunities',
+                'dubai-properties': 'Dubai Properties',
+                'dubai-properties-desc': 'Luxury investment opportunities in the heart of Dubai with the highest growth and investment return rates',
+                'no-oman-properties': 'No Properties Available Currently',
+                'coming-soon-oman': 'Coming soon - the best properties in Oman',
+                'notify-oman': 'Notify Me When Available',
+                'no-dubai-properties': 'No Properties Available Currently',
+                'coming-soon-dubai': 'Coming soon - the best properties in Dubai',
+                'notify-dubai': 'Notify Me When Available'
+            }
+        };
+
+        let currentLanguage = 'ar';
+
+        // Language menu functions
+        function toggleLanguageMenu() {
+            const menu = document.getElementById('language-menu');
+            const isVisible = menu.classList.contains('opacity-100');
+            
+            if (isVisible) {
+                menu.classList.remove('opacity-100', 'visible', 'scale-100');
+                menu.classList.add('opacity-0', 'invisible', 'scale-95');
+            } else {
+                menu.classList.remove('opacity-0', 'invisible', 'scale-95');
+                menu.classList.add('opacity-100', 'visible', 'scale-100');
+            }
+        }
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            const currentLangElement = document.getElementById('current-language');
+            
+            if (lang === 'ar') {
+                document.documentElement.setAttribute('lang', 'ar');
+                document.documentElement.setAttribute('dir', 'rtl');
+                showNotification('تم تغيير اللغة إلى العربية', 'success');
+            } else if (lang === 'en') {
+                document.documentElement.setAttribute('lang', 'en');
+                document.documentElement.setAttribute('dir', 'ltr');
+                showNotification('Language changed to English', 'success');
+            }
+            
+            // Update all text content
+            updatePageContent(lang);
+            
+            // Close the menu
+            toggleLanguageMenu();
+        }
+
+        function updatePageContent(lang) {
+            const t = translations[lang];
+            
+            // Update all elements with data-translate attribute
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (t[key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = t[key];
+                    } else {
+                        element.textContent = t[key];
+                    }
+                }
+            });
+            
+            // Update current language display
+            document.getElementById('current-language').textContent = t['current-language'];
+            
+            // Update button spacing based on language
+            const heroButtons = document.getElementById('hero-buttons');
+            if (lang === 'en') {
+                heroButtons.className = 'flex space-x-6 space-x-reverse';
+            } else {
+                heroButtons.className = 'flex space-x-4 space-x-reverse';
+            }
+            
+            // Reload properties with new language
+            loadFeaturedProperties();
+        }
+
+        function getTranslation(key) {
+            return translations[currentLanguage][key] || key;
+        }
+
+        // Close language menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const languageButton = event.target.closest('[onclick="toggleLanguageMenu()"]');
+            const languageMenu = document.getElementById('language-menu');
+            
+            if (!languageButton && !languageMenu.contains(event.target)) {
+                languageMenu.classList.remove('opacity-100', 'visible', 'scale-100');
+                languageMenu.classList.add('opacity-0', 'invisible', 'scale-95');
+            }
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99001ecba6fd127c',t:'MTc2MDcwNzUwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99124b505203127c',t:'MTc2MDg5ODA3Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
