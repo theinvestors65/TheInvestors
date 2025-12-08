@@ -404,7 +404,7 @@
        <div><label for="email" class="block text-sm font-medium mb-2" data-translate="email-label">Email</label> <input type="email" id="email" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300" data-translate="enter-email" placeholder="Enter your email">
        </div>
        <div><label for="phone" class="block text-sm font-medium mb-2" data-translate="phone-number">Phone Number</label>
-        <div id="phone-container" class="flex gap-3"><select id="country-code" class="w-32 p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white text-sm order-1"> <option value="+968" class="text-gray-800" data-translate-ar="عمان +968" data-translate-en="Oman +968">Oman +968</option> <option value="+971" class="text-gray-800" data-translate-ar="الإمارات +971" data-translate-en="UAE +971">UAE +971</option> <option value="+966" class="text-gray-800" data-translate-ar="السعودية +966" data-translate-en="Saudi Arabia +966">Saudi Arabia +966</option> <option value="+965" class="text-gray-800" data-translate-ar="الكويت +965" data-translate-en="Kuwait +965">Kuwait +965</option> <option value="+974" class="text-gray-800" data-translate-ar="ق����ر +974" data-translate-en="Qatar +974">Qatar +974</option> <option value="+973" class="text-gray-800" data-translate-ar="البحرين +973" data-translate-en="Bahrain +973">Bahrain +973</option> </select> <input type="tel" id="phone" required class="flex-1 p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300 order-2" data-translate="enter-phone" placeholder="Enter your phone number">
+        <div id="phone-container" class="flex gap-3"><select id="country-code" class="w-32 p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white text-sm order-1"> <option value="+968" class="text-gray-800" data-translate-ar="عمان +968" data-translate-en="Oman +968">Oman +968</option> <option value="+971" class="text-gray-800" data-translate-ar="الإمارات +971" data-translate-en="UAE +971">UAE +971</option> <option value="+966" class="text-gray-800" data-translate-ar="السعودية +966" data-translate-en="Saudi Arabia +966">Saudi Arabia +966</option> <option value="+965" class="text-gray-800" data-translate-ar="الكويت +965" data-translate-en="Kuwait +965">Kuwait +965</option> <option value="+974" class="text-gray-800" data-translate-ar="قطر +974" data-translate-en="Qatar +974">Qatar +974</option> <option value="+973" class="text-gray-800" data-translate-ar="البحرين +973" data-translate-en="Bahrain +973">Bahrain +973</option> </select> <input type="tel" id="phone" required class="flex-1 p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white placeholder-gray-300 order-2" data-translate="enter-phone" placeholder="Enter your phone number">
         </div>
        </div>
        <div><label for="subject" class="block text-sm font-medium mb-2" data-translate="message-subject">Options</label> <select id="subject" required class="w-full p-4 bg-white bg-opacity-10 border border-white border-opacity-30 rounded-lg focus:outline-none focus:border-amber-400 text-white"> <option value="" class="text-gray-800" data-translate="choose-subject">Choose Option</option> <option value="buying" class="text-gray-800" data-translate="buying-property">Buying Property</option> <option value="selling" class="text-gray-800" data-translate="selling-property">Selling Property</option> <option value="other" class="text-gray-800" data-translate="other">Other</option> </select>
@@ -476,14 +476,14 @@
 
         function notifyOmanProperties() {
             const message = currentLanguage === 'ar' ? 
-                'شكرا لك! سيتم إشعارك فور توفر ��قارات جديدة في عمان' : 
+                'شكراً لك! سيتم إشعارك فور توفر عقارات جديدة في عمان' : 
                 'Thank you! You will be notified as soon as new properties are available in Oman';
             showNotification(message, 'success');
         }
 
         function notifyDubaiProperties() {
             const message = currentLanguage === 'ar' ? 
-                'شكرا لك! سيتم إشعار�� فور توفر عقارات جديدة في دبي' : 
+                'شكراً لك! سيتم إشعارك فور توفر عقارات جديدة في دبي' : 
                 'Thank you! You will be notified as soon as new properties are available in Dubai';
             showNotification(message, 'success');
         }
@@ -557,7 +557,7 @@
             const emailBody = currentLanguage === 'ar' ? `
 الاسم الكامل: ${firstName} ${lastName}
 البريد الإلكتروني: ${email}
-رقم الهات��: ${fullPhone}
+رقم الهاتف: ${fullPhone}
 الخيار المحدد: ${subject}
 
 الرسالة:
@@ -589,7 +589,7 @@ This message was sent from The Investors website
                 event.target.reset();
                 
                 const successMessage = currentLanguage === 'ar' ? 
-                    `شكراً ${firstName}! تم فتح تطبيق البريد الإلكت��وني لإرسال رسالتك. يرجى الضغط على إرسال في تطبيق البريد` :
+                    `شكراً ${firstName}! تم فتح تطبيق البريد الإلكتروني لإرسال رسالتك. يرجى الضغط على إرسال في تطبيق البريد` :
                     `Thank you ${firstName}! The email application has been opened to send your message. Please click Send in the email app`;
                 showNotification(successMessage, 'success');
             }, 1500);
@@ -676,10 +676,10 @@ This message was sent from The Investors website
 
         const translations = {
             ar: {
-                'company-name': '��لمستثمرون',
+                'company-name': 'المستثمرون',
                 'nav-home': 'الرئيسية',
                 'nav-properties': 'العقارات',
-                'nav-services': 'خدماتن��',
+                'nav-services': 'خدماتنا',
                 'nav-about': 'من نحن',
                 'nav-contact': 'تواصل معنا',
                 'current-language': 'العربية',
@@ -688,10 +688,10 @@ This message was sent from The Investors website
                 'hero-btn-explore': 'استكشف العقارات',
                 'hero-btn-consultation': 'استشارة مجانية',
                 'properties-title': 'العقارات المميزة للبيع',
-                'properties-description': 'اكتشف مجموعة مختارة بعناية من أرقى ال��قارات المعروضة للبيع في أفضل المواقع',
+                'properties-description': 'اكتشف مجموعة مختارة بعناية من أرقى العقارات المعروضة للبيع في أفضل المواقع',
                 'about-title': 'من نحن',
                 'about-desc-1': 'المستثمرون هي شركة رائدة في مجال الاستثمار العقاري، تأسست على يد فريق من الخبراء المتخصصين في السوق العقاري العماني والإماراتي. نؤمن بأن العقار هو أساس الثروة المستدامة',
-                'about-desc-2': 'منذ تأسيسنا، نجحنا في تحقيق عوائد استثمارية متميزة لعملائنا من خلال اختيار أفضل الف��ص الاستثمارية في عمان والإمارات',
+                'about-desc-2': 'منذ تأسيسنا، نجحنا في تحقيق عوائد استثمارية متميزة لعملائنا من خلال اختيار أفضل الفرص الاستثمارية في عمان والإمارات',
                 'contact-title': 'تواصل معنا',
                 'contact-info-title': 'معلومات التواصل',
                 'email-label': 'البريد الإلكتروني',
@@ -702,7 +702,7 @@ This message was sent from The Investors website
                 'message-subject': 'الخيارات',
                 'message-text': 'الرسالة',
                 'send-message': 'إرسال الرسالة',
-                'choose-subject': 'اختر ال��يار',
+                'choose-subject': 'اختر الخيار',
                 'buying-property': 'شراء عقار',
                 'selling-property': 'بيع عقار',
                 'other': 'أخرى',
@@ -710,28 +710,28 @@ This message was sent from The Investors website
                 'enter-last-name': 'أدخل اسم العائلة',
                 'enter-email': 'أدخل بريدك الإلكتروني',
                 'enter-phone': 'أدخل رقم هاتفك',
-                'enter-message': 'اكتب رسالتك ه��ا',
+                'enter-message': 'اكتب رسالتك هنا',
                 'quick-links': 'روابط سريعة',
                 'our-services': 'الخدمات',
-                'property-selling': 'بيع ��لعقارات',
+                'property-selling': 'بيع العقارات',
                 'property-buying': 'شراء العقارات',
                 'investment-consulting': 'استشارات عقارية',
                 'footer-rights': 'جميع الحقوق محفوظة | تصميم وتطوير فريق المستثمرون',
-                'company-tagline': 'شريكك الموثوق في ع��لم الاستثمار العقاري',
+                'company-tagline': 'شريكك الموثوق في عالم الاستثمار العقاري',
                 'oman-properties': 'عقارات عمان',
-                'oman-properties-desc': 'استثمارات عقارية مميزة في السلطنة مع عوائد مضمونة وفرص نمو استثنائي��',
-                'dubai-properties': 'عقارات د��ي',
-                'dubai-properties-desc': 'فرص استثمارية فاخرة في قلب دبي مع أعلى معدلات النمو والعائد الاستث��اري',
-                'no-oman-properties': 'لا توجد عقارات متاحة ح��لياً',
-                'coming-soon-oman': 'قريبا�� سنعرض أفضل العقارات في عمان',
+                'oman-properties-desc': 'استثمارات عقارية مميزة في السلطنة مع عوائد مضمونة وفرص نمو استثنائية',
+                'dubai-properties': 'عقارات دبي',
+                'dubai-properties-desc': 'فرص استثمارية فاخرة في قلب دبي مع أعلى معدلات النمو والعائد الاستثماري',
+                'no-oman-properties': 'لا توجد عقارات متاحة حالياً',
+                'coming-soon-oman': 'قريباً سنعرض أفضل العقارات في عمان',
                 'notify-oman': 'أشعرني عند التوفر',
                 'no-dubai-properties': 'لا توجد عقارات متاحة حالياً',
                 'coming-soon-dubai': 'قريباً سنعرض أفضل العقارات في دبي',
-                'notify-dubai': 'أشع��ني عند التوفر',
+                'notify-dubai': 'أشعرني عند التوفر',
                 'property-types': 'الأنواع',
                 'property-price': 'السعر',
                 'property-handover': 'التسليم',
-                'contact-property': 'تواصل معنا للتفاص��ل'
+                'contact-property': 'تواصل معنا للتفاصيل'
             },
             en: {
                 'company-name': 'The Investors',
@@ -931,5 +931,5 @@ This message was sent from The Investors website
             }
         });
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9aae7df117831274',t:'MTc2NTIyMDI4My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9aae89c6c265127c',t:'MTc2NTIyMDc2OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
